@@ -1,0 +1,19 @@
+#space-between-tasks{
+    margin-bottom: 10px;
+}
+
+button {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+    
+}
+
+.nodot {
+    list-style-type: none;
+}
+

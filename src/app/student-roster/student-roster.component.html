@@ -1,0 +1,101 @@
+<!-- ON LOGIN - call function that iterates through every task. If todays date is greater than > nextDate...nextDate + frequency (or search for next custom date) -->
+<!-- Start Date Eliminated. Not much code needs to be changed, nextDate will always be the date picked on the calander. When logging in, nextDate will be updated based on
+the frequency. -->
+
+
+<div>
+    <table border = "3" *ngIf="studentList.length > 0">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Task</th>
+                <th>Task Manager</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of studentList">
+                <td [ngSwitch]="student.displayEditStudent">
+                    <div *ngSwitchCase="0">{{ student.name }} <button (click)="student.editStudentToggle(1)">Edit</button>
+                        <button (click)="deleteStudent(student)">Delete</button>
+                        <button (click)="student.editStudentToggle(2)">Add Task</button></div>
+                    <div *ngSwitchCase="1">
+                        <form [formGroup] ="edit_student_name" (ngSubmit)="sendEditedStudentName(student)">
+                            <input type="text" id="edit_student_name" name="edit_student_name" placeholder="{{student.name}}" formControlName="studentValueEntered">
+                            <input type="submit" class="submit" value="Change">
+                            <button (click)="goBackStudentName(student)">Exit</button>
+                        </form> 
+                    </div>
+                    <div *ngSwitchCase="2">{{ student.name }} 
+                        <form [formGroup] ="add_task" (ngSubmit)="sendAddTask(student)">
+                            <textarea rows="3" columns = "50" class="addTask" id="add_task" name="add_task" formControlName="taskValueEntered"></textarea>
+                            <br>
+                            <input type="submit" class="submit" value="Add">
+                            <button (click)="student.editStudentToggle(0)">Exit</button>
+                        </form>
+                    </div>
+                </td>
+                    <td *ngIf="student.tasks.length > 0">
+                    <ul id="space-between-tasks" *ngFor="let task of student.tasks" [ngSwitch]="task.displayEditTask">
+                        <li *ngSwitchCase="0" >{{ task.taskName }}
+                            <button (click)="task.editTaskToggle(1)">Edit</button>
+                            <button (click)="student.deleteTask(task)">Delete</button>
+                            <button (click)="task.editFrequencyToggle(1)">Task Manager</button>
+                            
+                        </li>
+                        <li *ngSwitchCase="1">
+                            <form [formGroup] ="edit_task_name" (ngSubmit)="sendEditedTask(student, task)">
+                                <input type="text" id="edit_task" name="edit_task" placeholder="{{task.taskName}}" formControlName="valueEntered">
+                                <input type="submit" class="submit" value="Change">
+                                <button (click)="goBack(task)">Exit</button>
+                            </form> 
+                                
+                            </li>
+                        </ul>
+                    </td>
+                    <td *ngIf="student.tasks.length <= 0">No Tasks to Display</td>
+
+                    <td *ngIf="student.tasks.length > 0">
+                        <ul class="nodot" id="space-between-tasks" *ngFor="let task of student.tasks" [ngSwitch]="task.displayFrequencyTask">
+                            <li *ngSwitchCase="0">Set Up Task Manager</li>
+                            <li *ngSwitchCase="1"> 
+                                    <strong>Frequency of Task </strong><br> 
+                                    <select #times name="times" id="times" (change)="task.onSelectFrequency(times.value)">
+                                        <option value="None">Select An Option</option> 
+                                        <option value="No Change">No Change</option>
+                                        <option value="Once">Only Once</option> 
+                                        <option value="Daily">Once A Day (Weekdays Only)</option> 
+                                        <option value="Alternate">Every Other Day (Weekdays Only)</option> 
+                                        <option value="Weekly">Once A Week</option> 
+                                        <option value="Bimonthly">Every other week</option> 
+                                        <option value="Monthly">Once A Month</option>
+                                        <option value="Custom">Custom Schedule</option>
+                                    </select>                                                               
+                            </li>
+                            
+                            <li *ngSwitchCase="2">
+                                <strong>Select Date</strong>
+                                <form [formGroup] ="select_date" (change)="logDate(task, false)">
+                                    <input type="date" id="task_date" name="task_date" formControlName="dateSelected">
+                                </form> 
+                            </li>
+                            <li *ngSwitchCase="3">||{{task.frequency}}|| <strong>Start:</strong> {{task.startDate}}  <strong>Upcoming: </strong>{{ task.nextEvent }}</li>
+                            <li *ngSwitchCase="4">Due Date - {{task.nextEvent}}</li>
+                            <li *ngSwitchCase="5">
+                                Weekly Schedule - Check Days <button (click)="logDate(task, true)">Submit</button><br>
+                                
+                                <input type="checkbox" id="monday" name="amon" (change)="task.validateDaysChecked($event)"> Monday 
+                                <input type="checkbox" id="tuesday" name="btue" (change)="task.validateDaysChecked($event)"> Tuesday
+                                <input type="checkbox" id="wednesday" name="cwed" (change)="task.validateDaysChecked($event)"> Wednesday
+                                <input type="checkbox" id="thursday" name="dthu" (change)="task.validateDaysChecked($event)"> Thursday
+                                <input type="checkbox" id="friday" name="efri" (change)="task.validateDaysChecked($event)"> Friday
+
+                            </li>
+                        </ul>
+                    </td>
+                    <td *ngIf="student.tasks.length <= 0">Nothing to Display</td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>
+

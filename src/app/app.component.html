@@ -1,0 +1,29 @@
+<h1> {{ title }} </h1>
+<hr>
+<h2>{{ welcomeMessage }}</h2>
+<br><br>
+<h3>Add New Student</h3>
+<br>
+<form [formGroup] ="studentForm" (ngSubmit)="addStudent()">
+  <label for="fname">Student Name:</label><br>
+  <input type="text" id="fname" name="fname" formControlName="first_name"><br>
+  <div *ngIf="!nameExists" class="error">Student must have a name</div>
+  <label for="task">Task:</label><br>
+  <input type="text" id="task" name="task" formControlName="task">
+  <div *ngIf="!taskExists" class="error">Student must have at least one task</div>
+  <br>
+  <input type="submit" class="submit" value="Submit">
+  <br><br>
+</form> 
+
+Today's Date is {{ todaysDate }}
+<br><br>
+TODO - 
+List Critical Events (list events happening today)<br>
+Add Login Screen<br>
+Add style with Bootstrap<br>
+Check custom schedule algorithm - not selecting correct next day.<br>
+
+
+
+<app-student-roster [enteredFirst] = enteredFirst [enteredTask] = enteredTask></app-student-roster>
