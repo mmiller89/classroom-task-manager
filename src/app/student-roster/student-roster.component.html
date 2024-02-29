@@ -78,7 +78,7 @@ the frequency. -->
                                     <input type="date" id="task_date" name="task_date" formControlName="dateSelected">
                                 </form> 
                             </li>
-                            <li *ngSwitchCase="3">||{{task.frequency}}|| <strong>Start:</strong> {{task.startDate}}  <strong>Upcoming: </strong>{{ task.nextEvent }}</li>
+                            <li *ngSwitchCase="3">||{{task.frequency}}|| <strong>Next Event: </strong>{{ task.nextEvent }}</li>
                             <li *ngSwitchCase="4">Due Date - {{task.nextEvent}}</li>
                             <li *ngSwitchCase="5">
                                 Weekly Schedule - Check Days <button (click)="logDate(task, true)">Submit</button><br>

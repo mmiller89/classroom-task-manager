@@ -62,7 +62,7 @@ export class StudentRosterComponent {
       if (customSchedule){
        
        
-        task.startDate = format(new Date(), "EE, MMM dd");
+        task.startDate = format(new Date(), "MMMM/dd/yyyy");
         task.submitCustomSchedule(true);
         task.editFrequencyToggle(3);
   

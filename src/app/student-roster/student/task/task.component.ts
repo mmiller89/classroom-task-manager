@@ -131,9 +131,9 @@ export class Task {
     console.log(correlatedDates[0]);
     console.log(typeof correlatedDates[0])
     
-    //CorrelatedDates[0] is the correct next date, but i'm getting an invalid time value error when trying to display the date.
 
-    this.nextEvent = format(new Date(correlatedDates[0]), 'EE, MMM dd') 
+    let test = format(new Date(correlatedDates[0]), 'MMMM/dd/yyyy')
+    this.nextEvent = format(new Date(test), 'EE, MMM dd') 
     
   }
 
