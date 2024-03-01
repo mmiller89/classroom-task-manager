@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Task } from './task/task.component';
+import { add, addDays, addWeeks, addMonths, nextMonday, nextTuesday, nextWednesday, nextThursday, nextFriday, format, isSaturday, isSunday, closestTo, toDate } from 'date-fns'
 
 @Component({
   selector: 'app-student',
@@ -24,9 +25,24 @@ export class StudentComponent  {
 
 export class Student {
 
-  // constructor(@Inject(String) public name: string, @Inject(TaskComponent)public tasks: TaskComponent[], @Inject(String) public id: string) {}
-
       constructor(public name: string, public tasks: Task[], public id: string, public displayEditStudent: number) {
+      }
+
+    
+      public criticalTasks = new Set<string>;
+
+      updateCriticalTasks(taskName: string, isToday: boolean){
+        if (isToday){
+          this.criticalTasks.add(taskName)
+        } 
+        else {
+          this.criticalTasks.forEach(e => {
+            if (e == taskName){
+              this.criticalTasks.delete(e);
+            }
+          });
+        }
+        
       }
 
       deleteTask(selectedTask: Task){

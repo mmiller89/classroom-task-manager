@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { add, addDays, addWeeks, addMonths, nextMonday, nextTuesday, nextWednesday, nextThursday, nextFriday, format, isSaturday, isSunday, closestTo, toDate } from 'date-fns'
 
 @Component({
@@ -14,14 +14,14 @@ export class Task {
 
   public startDate: string;
   public nextEvent: string;
+  public nextEventDisplay: string;
   public days_array: any;
   public temp_task_custom = new Set();
+  public displayCustomFreq: string;
+  
 
   constructor (public taskName: string, public frequency: string, public displayEditTask: number, public displayFrequencyTask: number){
   }
-
-
-  //refreshNextCustomDate(){}
 
 
   editTaskToggle(num: number){
@@ -40,6 +40,7 @@ export class Task {
         this.editFrequencyToggle(3);
       } 
       else if (value == "Custom"){
+        this.displayCustomFreq = value;
         this.editFrequencyToggle(5);
       } else {
         this.frequency = value;
@@ -63,13 +64,14 @@ export class Task {
     }
   }
 
-  submitCustomSchedule(initialCall: boolean){
-  
+  submitCustomSchedule(todaysDate: string, initialized: boolean){
+      
       let stringFreq: string = ""
       let sortedArray = [...this.temp_task_custom].sort();
       this.days_array = [...sortedArray]
 
-      console.log(this.days_array)
+      // console.log(this.temp_task_custom)
+      // console.log(this.days_array)
       
       
       //We have a sorted list (in order) of the days checked. We need to check what day it is, and set nextDate to the nearest checked date.
@@ -101,19 +103,27 @@ export class Task {
 
     //First day of array is Tuesday and I want custom Thurs/Friday only.
     //[dthu, efri], todays date is saved to Start Date already
+    
+    this.calculateNextDay(todaysDate, initialized)
+    
+  }
+
+  calculateNextDay(todaysDate: string, initialized: boolean){
+    console.log(this.days_array)
+    console.log(todaysDate)
 
     let arrayUpcomingDates: any
-    let plusOne = format(new Date(addDays((this.startDate), 1)), 'MMMM/dd/yyyy')
-    let plusTwo = format(new Date(addDays((this.startDate), 2)), 'MMMM/dd/yyyy')
-    let plusThree = format(new Date(addDays((this.startDate), 3)), 'MMMM/dd/yyyy')
-    let plusFour = format(new Date(addDays((this.startDate), 4)), 'MMMM/dd/yyyy')
-    let plusFive = format(new Date(addDays((this.startDate), 5)), 'MMMM/dd/yyyy')
-    let plusSix = format(new Date(addDays((this.startDate), 6)), 'MMMM/dd/yyyy')
-    let plusSeven = format(new Date(addDays((this.startDate), 7)), 'MMMM/dd/yyyy')
+    let plusOne = format(new Date(addDays((todaysDate), 1)), 'MMMM/dd/yyyy')
+    let plusTwo = format(new Date(addDays((todaysDate), 2)), 'MMMM/dd/yyyy')
+    let plusThree = format(new Date(addDays((todaysDate), 3)), 'MMMM/dd/yyyy')
+    let plusFour = format(new Date(addDays((todaysDate), 4)), 'MMMM/dd/yyyy')
+    let plusFive = format(new Date(addDays((todaysDate), 5)), 'MMMM/dd/yyyy')
+    let plusSix = format(new Date(addDays((todaysDate), 6)), 'MMMM/dd/yyyy')
+    let plusSeven = format(new Date(addDays((todaysDate), 7)), 'MMMM/dd/yyyy')
 
-    arrayUpcomingDates = [plusOne, plusTwo, plusThree, plusFour, plusFive, plusSix, plusSeven]
+    arrayUpcomingDates = [todaysDate, plusOne, plusTwo, plusThree, plusFour, plusFive, plusSix, plusSeven]
   
-    console.log(typeof arrayUpcomingDates[0])
+   
     let correlatedDates: Date[] = [];
 
     for (let i = 0; i < this.days_array.length; i++){
@@ -125,28 +135,30 @@ export class Task {
         if (adjustedString == dayVal){
           correlatedDates.push(arrayUpcomingDates[k])
         }
+        console.log("Return array = " + correlatedDates)
       }
     }
-
-    console.log(correlatedDates[0]);
-    console.log(typeof correlatedDates[0])
     
-
-    let test = format(new Date(correlatedDates[0]), 'MMMM/dd/yyyy')
-    this.nextEvent = format(new Date(test), 'EE, MMM dd') 
     
+    
+    this.days_array.push(this.days_array.shift())
+    correlatedDates.sort();
+    let chosenDate: any;
+    chosenDate = format(new Date(correlatedDates[0]), 'MMMM/dd/yyyy')
+    this.nextEvent = format(new Date(chosenDate), 'MMMM/dd/yyyy');
+    this.nextEventDisplay = format(new Date(chosenDate), 'EE dd MMMM');
   }
 
 
 
   weekendAdjust(nextDate: Date){
     if (isSaturday(nextDate)){
-      return format(new Date(addDays(nextDate, 2)), 'EE, MMM dd');
+      return format(new Date(addDays(nextDate, 2)), 'MMMM/dd/yyyy');
     }
     if (isSunday(nextDate)){
-      return format(new Date(addDays(nextDate, 1)), 'EE, MMM dd');
+      return format(new Date(addDays(nextDate, 1)), 'MMMM/dd/yyyy');
     }
-    return format(new Date(nextDate), "EE, MMM dd");
+    return format(new Date(nextDate), 'MMMM/dd/yyyy');
   }
 
 

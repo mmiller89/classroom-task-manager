@@ -3,6 +3,16 @@
 }
 
 h1 {
-    text-align: center;
+    text-align: left;
+    display: inline;
+    margin-right: 20px;
+}
+
+.form-inline{
+    display: inline;
+}
+
+.right-space {
+    margin-right: 20px;
 }
 

@@ -1,5 +1,18 @@
 
-
+Today's Date is {{ todaysDateDisplay }}
+<div>Critical Events (Due Today)</div>
+<div *ngIf="studentsWithCriticalTasks.length <= 0">Nothing. Good job!</div>
+<div *ngIf="studentsWithCriticalTasks.length > 0">
+    <ul>
+        <li *ngFor="let student of studentsWithCriticalTasks">{{student.name}}
+            <ol>
+                <li *ngFor="let task of student.criticalTasks">{{task}}</li>
+            </ol>
+        </li>
+        
+    </ul>
+</div>
+<div><button (click)="dayMinusOne()">Day -1</button><button (click)="dayPlusOne()">Day +1</button></div>
 
 <div>
     <table border = "3" *ngIf="studentList.length > 0">
@@ -64,7 +77,7 @@
                                         <option value="Daily">Once A Day (Weekdays Only)</option> 
                                         <option value="Alternate">Every Other Day (Weekdays Only)</option> 
                                         <option value="Weekly">Once A Week</option> 
-                                        <option value="Bimonthly">Every other week</option> 
+                                        <option value="Biweekly">Every other week</option> 
                                         <option value="Monthly">Once A Month</option>
                                         <option value="Custom">Custom Schedule</option>
                                     </select>                                                               
@@ -72,12 +85,14 @@
                             
                             <li *ngSwitchCase="2">
                                 <strong>Select Date</strong>
-                                <form [formGroup] ="select_date" (change)="logDate(task, false)">
+                                <form [formGroup] ="select_date" (ngSubmit)="logDate(task, false)">
                                     <input type="date" id="task_date" name="task_date" formControlName="dateSelected">
+                                    <input type="submit" class="login" value="Submit">
+                                    
                                 </form> 
                             </li>
-                            <li *ngSwitchCase="3">||{{task.frequency}}|| <strong>Next Event: </strong>{{ task.nextEvent }}</li>
-                            <li *ngSwitchCase="4">Due Date - {{task.nextEvent}}</li>
+                            <li *ngSwitchCase="3">||{{task.frequency}}|| <strong>Next Event: </strong>{{ task.nextEventDisplay }}</li>
+                            <li *ngSwitchCase="4">Due Date - {{task.nextEventDisplay}}</li>
                             <li *ngSwitchCase="5">
                                 Weekly Schedule - Check Days <button (click)="logDate(task, true)">Submit</button><br>
                                 

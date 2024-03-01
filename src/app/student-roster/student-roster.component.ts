@@ -1,11 +1,11 @@
-import { Component, Input, Output} from '@angular/core';
+import { Component, Input, ViewChild} from '@angular/core';
 import { FormControl, FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { Student } from './student/student.component';
-import { Task } from './student/task/task.component';
+import { Task, TaskComponent } from './student/task/task.component';
 import { EventEmitter } from 'stream';
 import { NgModel } from '@angular/forms';
-import { add, addDays, addWeeks, addMonths, nextMonday, nextTuesday, nextWednesday, nextThursday, nextFriday, format, isSaturday, isSunday, toDate } from 'date-fns'
+import { add, addDays, addWeeks, addMonths, nextMonday, nextTuesday, nextWednesday, nextThursday, nextFriday, format, isSaturday, isSunday, toDate, subDays } from 'date-fns'
 
 
 
@@ -18,9 +18,8 @@ export class StudentRosterComponent {
     
 
     @Input() enteredFirst: string;
-    @Input() enteredLast: string;
     @Input() enteredTask: string;
-
+   
 
     edit_task_name = new FormGroup({
       valueEntered: new FormControl("")
@@ -38,11 +37,11 @@ export class StudentRosterComponent {
       dateSelected: new FormControl("")
     })
 
-    // custom_dates = new FormGroup({
-    //   days_checked: new FormControl("")
-    // })
+ 
     
     //Insert testing data//
+    todaysDate = format(new Date(), "MMMM/dd/yyyy");
+    todaysDateDisplay = format(new Date(), 'EE dd MMMM');
     taskOne = new Task("Test on sight words.", "None", 0, 0)
     taskTwo = new Task("Behavior Check-In", "None", 0, 0)
     taskThree = new Task("RTI Assessment", "None", 0, 0)
@@ -53,22 +52,114 @@ export class StudentRosterComponent {
     Andrea = new Student("Andrea A", [this.taskThree, this.taskFour], "2", 0)
     Ash = new Student("Ash K", [this.taskFive, this.taskSix], "3", 0)
     studentList: Student[] = [this.Michael, this.Andrea, this.Ash]
+    studentsWithCriticalTasks: Student[] = []
+    
     //Insert testing data
 
+
+  //For Testing Purpose Only
+  dayPlusOne(){
+    this.todaysDate = format(new Date(addDays(this.todaysDate, 1)), 'MMMM/dd/yyyy');
+    this.todaysDateDisplay = format(new Date(this.todaysDate), 'EE dd MMMM');
+    this.verifyCriticalUpdates();
+  }
+
+  dayMinusOne(){
+    this.todaysDate = format(new Date(subDays(this.todaysDate, 1)), 'MMMM/dd/yyyy');
+    this.todaysDateDisplay = format(new Date(this.todaysDate), 'EE dd MMMM');
+    this.verifyCriticalUpdates();
+  }
+
+  //Adjusts all tasks that are past due to next date.
+  pushNextEvent(task: Task){
+    let date: any;
+    if (task.frequency == "Daily"){
+      task.nextEvent = format(new Date(this.todaysDate), "MMMM/dd/yyyy");
+      date = task.nextEvent;
+      task.nextEvent = task.weekendAdjust(date);
+    } 
+    else if (task.frequency == "Alternate"){
+      task.nextEvent = format(new Date(addDays(task.nextEvent, 2)), 'MMMM/dd/yyyy');
+      date = task.nextEvent;
+      task.nextEvent = task.weekendAdjust(date);
+    } 
+    else if (task.frequency == "Weekly"){
+      task.nextEvent = format(new Date(addWeeks(task.nextEvent, 1)), 'MMMM/dd/yyyy');
+      date = task.nextEvent;
+      task.nextEvent = task.weekendAdjust(date);
+    } 
+    else if (task.frequency == "Biweekly"){
+      task.nextEvent = format(new Date(addWeeks(task.nextEvent, 2)), 'MMMM/dd/yyyy');
+      date = task.nextEvent;
+      task.nextEvent = task.weekendAdjust(date);
+    }
+    else if (task.frequency == "Monthly"){
+      task.nextEvent = format(new Date(addMonths(task.nextEvent, 1)), 'MMMM/dd/yyyy');
+      date = task.nextEvent;
+      task.nextEvent = task.weekendAdjust(date);
+    } 
+    else if (task.frequency == "Once"){
+      task.nextEvent = ""
+      task.nextEventDisplay = "Event Expired"
+    }
+    else if (task.displayCustomFreq == "Custom"){
+      task.calculateNextDay(this.todaysDate, false);
+    }
+
+    if (task.frequency != "Once"){
+      task.nextEventDisplay = format(new Date(task.nextEvent), 'EE dd MMMM'); 
+    }
+    
+
+  }
+
+    verifyCriticalUpdates(){
+      if (this.studentsWithCriticalTasks.length > 0){
+        this.studentsWithCriticalTasks = [];
+      }
+      for (let s of this.studentList){
+        if (s.tasks.length > 0){
+          for (let t of s.tasks){
+            console.log(t.nextEvent)
+            if (t.nextEvent != null && t.nextEvent != undefined && t.nextEvent != ""){
+              
+              // console.log(t.nextEvent);
+              // console.log(this.todaysDate);
+
+              if (t.nextEvent < this.todaysDate){
+                this.pushNextEvent(t);
+              }
+
+              if (t.nextEvent === this.todaysDate){
+                s.updateCriticalTasks(t.taskName, true);
+              } else {
+                s.updateCriticalTasks(t.taskName, false);
+              }
+
+              
+            }
+            
+          }
+        }
+      }
+
+      for (let student of this.studentList){
+        if (student.criticalTasks.size > 0){
+          this.studentsWithCriticalTasks.push(student)
+        }
+      }
+    }
   
 
     logDate(task: Task, customSchedule: boolean){
       
       if (customSchedule){
-       
-       
         task.startDate = format(new Date(), "MMMM/dd/yyyy");
-        task.submitCustomSchedule(true);
+        task.submitCustomSchedule(this.todaysDate, true);
         task.editFrequencyToggle(3);
+        this.verifyCriticalUpdates();
   
       } else {
-  
-       let todaysDate = format(new Date(), "MMMM/dd/yyyy");
        let nextDate: any;
        
        //format the date selected by user//
@@ -77,59 +168,35 @@ export class StudentRosterComponent {
        
        //convert to readable form
        chosenDate = chosenDate.replace(/-/, '/').replace(/-/, '/');
-       let dateHuman = format(new Date(chosenDate), "EE, MMM dd")
-
+       
        //this format is for date-fns functions to manipulate
        let weekDayCheck = format(new Date(chosenDate), "MMMM/dd/yyyy")
       
        //check to make sure chosen date is not before today, otherwise fails.
   
-       if (toDate(new Date(todaysDate)) > toDate(new Date(weekDayCheck))){
+       if (toDate(new Date(this.todaysDate)) > toDate(new Date(weekDayCheck))){
          alert("Must choose today or after!")
          task.editFrequencyToggle(2)
          
-       } else {
-         if (task.frequency == "Daily"){
-           nextDate = format(new Date(addDays(weekDayCheck, 1)), 'MMMM dd, yyyy');
-           // weekDayCheck = format(new Date(addDays(dateHuman, 1)), "MMMM/dd/yyyy");
-           nextDate = task.weekendAdjust(nextDate);
-         } 
-         else if (task.frequency == "Alternate"){
-           nextDate = format(new Date(addDays(weekDayCheck, 2)), 'MMMM dd, yyyy');
-           // weekDayCheck = format(new Date(addDays(dateHuman, 2)), "MMMM/dd/yyyy");
-           nextDate = task.weekendAdjust(nextDate);
-         } 
-         else if (task.frequency == "Weekly"){
-           nextDate = format(new Date(addWeeks(weekDayCheck, 1)), 'MMMM dd, yyyy');
-           // weekDayCheck = format(new Date(addWeeks(dateHuman, 1)), "MMMM/dd/yyyy");
-           nextDate = task.weekendAdjust(nextDate);
-         } 
-         else if (task.frequency == "Bimonthly"){
-           nextDate = format(new Date(addWeeks(weekDayCheck, 2)), 'MMMM dd, yyyy');
-           // weekDayCheck = format(new Date(addWeeks(dateHuman, 2)), "MMMM/dd/yyyy");
-           nextDate = task.weekendAdjust(nextDate);
-         }
-         else if (task.frequency == "Monthly"){
-           nextDate = format(new Date(addMonths(weekDayCheck, 1)), 'MMMM dd, yyyy');
-           // weekDayCheck = format(new Date(addMonths(dateHuman, 1)), "MMMM/dd/yyyy");
-           nextDate = task.weekendAdjust(nextDate);
-         } 
-         else if (task.frequency == "Once"){
-           nextDate = format(new Date(weekDayCheck), 'MMMM dd, yyyy');
-           nextDate = task.weekendAdjust(nextDate);
-         }
+       } 
+       else {
+            nextDate = weekDayCheck;
+            nextDate = task.weekendAdjust(nextDate);
+            task.startDate = this.todaysDate;
+            task.nextEvent = nextDate;
+            task.nextEventDisplay = format(new Date(nextDate), 'EE dd MMMM') 
+            chosenDate = "";
+            task.editFrequencyToggle(task.frequency == "Once" ? 4 : 3);
+            this.verifyCriticalUpdates();
        }
-         task.startDate = dateHuman;
-         task.nextEvent = nextDate; 
-         chosenDate = "";
-         task.editFrequencyToggle(task.frequency == "Once" ? 4 : 3);
+         
        }
+       
        
        
      }
-  
-     //Ensures that task.nextEvent will never fall on a Saturday or Sunday. Also converts back to readable format to display.
      
+
 
 
     insertStudents(firstname: string, task_list: Task[], displayEditStudent: number){

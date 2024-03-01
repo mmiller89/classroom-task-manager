@@ -21,16 +21,38 @@ export class AppComponent {
     task: new FormControl("")
   })
 
+  loginForm = new FormGroup({
+    username: new FormControl(""),
+    password: new FormControl("")
+  })
+
   title = 'Classroom Task Manager';
-  teacherName = "Michael";
-  welcomeMessage = `Welcome back ${this.teacherName}!`;
+  teacherName = "N/A"
+  welcomeMessage = ""
 
   
   enteredFirst = "";
   enteredTask = "";
   nameExists = true;
   taskExists = true;
-  todaysDate = format(new Date(), "MMMM, dd, yyyy");
+  isEventsCritical = false;
+  beginApplication = false;
+  georgeEHarrisLogin = 528528;
+
+  logout(){
+    this.loginForm.reset();
+    this.beginApplication = false;
+  }
+
+  validateLogin(){
+    if (this.loginForm.value.password == "123"){
+      this.teacherName = this.loginForm.value.username!;
+      this.welcomeMessage = `Welcome back ${this.teacherName}!`;
+      this.beginApplication = true;
+    } else {
+      alert("Validation failed. Password is 123.")
+    }
+  }
 
   addStudent(){
 
