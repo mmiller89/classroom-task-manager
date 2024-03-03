@@ -1,0 +1,5 @@
+  <a href="https://www.flaticon.com/free-icons/edit" title="edit icons">Edit icons created by Rizki Ahmad Fauzi - Flaticon</a>
+    <a href="https://www.flaticon.com/free-icons/tasks" title="tasks icons">Tasks icons created by Dooder - Flaticon</a>
+    <a href="https://www.flaticon.com/free-icons/add" title="add icons">Add icons created by Freepik - Flaticon</a>
+     <a href="https://www.flaticon.com/free-icons/foursquare-check-in" title="foursquare check in icons">Foursquare check in icons created by hqrloveq - Flaticon</a>
+     <a href="https://www.flaticon.com/free-icons/cancel" title="cancel icons">Cancel icons created by Alfredo Hernandez - Flaticon</a>

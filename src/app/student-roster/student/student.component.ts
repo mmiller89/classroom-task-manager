@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Task } from './task/task.component';
-import { add, addDays, addWeeks, addMonths, nextMonday, nextTuesday, nextWednesday, nextThursday, nextFriday, format, isSaturday, isSunday, closestTo, toDate } from 'date-fns'
+
 
 @Component({
   selector: 'app-student',
@@ -41,6 +41,7 @@ export class Student {
               this.criticalTasks.delete(e);
             }
           });
+         
         }
         
       }
@@ -49,6 +50,7 @@ export class Student {
         for (let i = 0; i < this.tasks.length; i++){
             if (this.tasks[i].taskName == selectedTask.taskName){
                 this.tasks.splice(i, 1);
+                this.updateCriticalTasks (selectedTask.taskName, false)
             }
         }   
       }

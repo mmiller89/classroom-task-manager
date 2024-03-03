@@ -201,7 +201,7 @@ export class StudentRosterComponent {
 
     insertStudents(firstname: string, task_list: Task[], displayEditStudent: number){
       let uuid = uuidv4();
-      this.studentList.push(new Student(firstname, task_list, uuid, displayEditStudent));
+      this.studentList.unshift(new Student(firstname, task_list, uuid, displayEditStudent));
      
     }
 
@@ -274,7 +274,4 @@ export class StudentRosterComponent {
     goBackStudentName(student: Student){
       student.editStudentToggle(0);
     }
-
-   
-   
 }

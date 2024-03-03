@@ -9,11 +9,25 @@ button {
 
 table {
     width: 100%;
-    table-layout: fixed;
     
 }
 
 .nodot {
     list-style-type: none;
 }
+
+.icons {
+    width: 2.5em;
+    height: 2.5em;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+
+
+
 

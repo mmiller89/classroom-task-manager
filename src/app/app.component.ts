@@ -36,7 +36,7 @@ export class AppComponent {
   nameExists = true;
   taskExists = true;
   isEventsCritical = false;
-  beginApplication = false;
+  beginApplication = true;
   georgeEHarrisLogin = 528528;
 
   logout(){

@@ -1,40 +1,56 @@
-<h1> {{ title }} </h1> 
-<form [formGroup] ="loginForm" (ngSubmit)="validateLogin()"class="form-inline">
-  <label for="username">Username: </label>
-  <input type="text" id="username" name="username" class="right-space" formControlName="username">
-  <label for="password">Password: </label>
-  <input type="text" id="password" name="password" class="right-space" formControlName="password">
-  <input type="submit" class="login" value="Login" class="right-space">
-</form>
-<input type="submit" class="logout" value="Logout" (click)="logout()" class="right-space">
-<input type="submit" class="create_new_account" value="Create New Account">
-<hr>
-
-<div *ngIf="beginApplication">
-  <h2>{{ welcomeMessage }}</h2>
-  <br><br>
-  <h3>Add New Student</h3>
-  <br>
-  <form [formGroup] ="studentForm" (ngSubmit)="addStudent()">
-    <label for="fname">Student Name:</label><br>
-    <input type="text" id="fname" name="fname" formControlName="first_name"><br>
-    <div *ngIf="!nameExists" class="error">Student must have a name</div>
-    <label for="task">Task:</label><br>
-    <input type="text" id="task" name="task" formControlName="task">
-    <div *ngIf="!taskExists" class="error">Student must have at least one task</div>
-    <br>
-    <input type="submit" class="submit" value="Submit">
+<div class="flex-container-ult">
+<h1> {{ title }} </h1>
+      
+        <form [formGroup] ="loginForm" (ngSubmit)="validateLogin()"class="form-inline">
+          
+          <label for="username">Username: </label>
+          <input type="text" id="username" name="username" class="right-space type" formControlName="username">
+        
+          
+          
+          <label for="password">Password: </label>
+          <input type="text" id="password" name="password" class="right-space type" formControlName="password">
+          
+          
+          <input type="submit" value="Login" class="right-space login button">
+          <input type="submit" value="Logout" (click)="logout()" class="right-space logout button">
+          <input type="submit" class="create_new_account button" value="Create Account">
+        </form>
+      
+        
+          
+      
+</div>
+<div *ngIf="beginApplication" class="left-margin right-margin">
+  <div class="flex-container">
+    <div>
+      <img src="assets/test.jpg" class="left-margin">
+    </div>
+    <div>
+    <h2>{{ welcomeMessage }}</h2>
     <br><br>
-  </form> 
-
-
-
-  <app-student-roster [enteredFirst] = enteredFirst [enteredTask] = enteredTask></app-student-roster>
+    <h3>Add New Student</h3>
+    <br>
+    <form [formGroup] ="studentForm" (ngSubmit)="addStudent()">
+      <label for="fname">Student Name:</label><br>
+      <input type="text" id="fname" class="type" name="fname" formControlName="first_name"><br>
+      <div *ngIf="!nameExists" class="error">Student must have a name</div>
+      <label for="task">Task:</label><br>
+      <input type="text" id="task" name="task" formControlName="task" class="type">
+      <div *ngIf="!taskExists" class="error">Student must have at least one task</div>
+      <br>
+      <input type="submit" class="submit button" value="Submit">
+    </form>
+  </div>
+   
+  </div>
+  <app-student-roster class="container" [enteredFirst] = enteredFirst [enteredTask] = enteredTask></app-student-roster>
 </div>
 
 <div *ngIf="!beginApplication"> 
   <p>Please login to begin. For mock app the username is anything you want, and password is 123. You do not need to create an account.</p>
+  <p>This app is intended for classroom teachers who want to better manage their classroom students and the tasks associated with them.</p>
   <p>Please note, due to FERPA (Family Education Rights and Privacy Act) it is crucial that you<strong> do not enter in any real student information.</strong>
     <br>You may use first names or aliases if two students with the same name exist in your class. Read more about FERPA at <a href="https://www2.ed.gov/policy/gen/guid/fpco/ferpa/index.html">this link</a>.</p>
   <p>Understand that this is a mock app made by a student/prospective junior engineer to demonstrate Angular/Springboot competencies. Data security is not guaranteed.</p>
-  </div>
+</div>
