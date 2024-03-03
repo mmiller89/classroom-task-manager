@@ -1,18 +1,21 @@
+<!-- <div class="flex-container-three">
+    Today's Date is {{ todaysDateDisplay }}<br><br>
+    <div class="margin-right">Critical Events (Due Today)</div><br>
+    <div *ngIf="studentsWithCriticalTasks.length <= 0">Nothing. Good job!</div>
+    <div *ngIf="studentsWithCriticalTasks.length > 0">
+        <ul>
+            <li *ngFor="let student of studentsWithCriticalTasks">{{student.name}}
+                <ol>
+                    <li *ngFor="let task of student.criticalTasks">{{task}}</li>
+                </ol>
+            </li>
+            
+        </ul>
+    </div>
+    <div><button (click)="dayMinusOne()" class="button">Day -1</button><button (click)="dayPlusOne()" class="button">Day +1</button></div>
+</div>
+<br> -->
 
-Today's Date is {{ todaysDateDisplay }}<br><br>
-<div class="margin-right">Critical Events (Due Today)</div><br>
-<div *ngIf="studentsWithCriticalTasks.length <= 0">Nothing. Good job!</div>
-<div *ngIf="studentsWithCriticalTasks.length > 0">
-    <ul>
-        <li *ngFor="let student of studentsWithCriticalTasks">{{student.name}}
-            <ol>
-                <li *ngFor="let task of student.criticalTasks">{{task}}</li>
-            </ol>
-        </li>
-        
-    </ul>
-</div><br>
-<div><button (click)="dayMinusOne()" class="button">Day -1</button><button (click)="dayPlusOne()" class="button">Day +1</button></div>
 
 <div>
     <br>
@@ -67,7 +70,7 @@ Today's Date is {{ todaysDateDisplay }}<br><br>
                             </li>
                         </ul>
                     </td>
-                    <td *ngIf="student.tasks.length <= 0">No Tasks to Display</td>
+                    <td *ngIf="student.tasks.length <= 0">Add A Task With <img src="/assets/add.png" class="icons"></td>
 
                     <td *ngIf="student.tasks.length > 0">
                         <ul class="nodot" id="space-between-tasks" *ngFor="let task of student.tasks" [ngSwitch]="task.displayFrequencyTask">
@@ -101,13 +104,34 @@ Today's Date is {{ todaysDateDisplay }}<br><br>
                             <li *ngSwitchCase="5">
                                 Weekly Schedule - Check Days 
                                 <input type="image" src="/assets/check.png" (click)="logDate(task, true)" class="submit icons">
-                                <input type="image" src="/assets/cancel.png" (click)="task.editFrequencyToggle(1)" class="icons" title="Cancel"><br>
-                                
-                                <input type="checkbox" id="monday" name="amon" (change)="task.validateDaysChecked($event)"> Monday 
-                                <input type="checkbox" id="tuesday" name="btue" (change)="task.validateDaysChecked($event)"> Tuesday
-                                <input type="checkbox" id="wednesday" name="cwed" (change)="task.validateDaysChecked($event)"> Wednesday
-                                <input type="checkbox" id="thursday" name="dthu" (change)="task.validateDaysChecked($event)"> Thursday
-                                <input type="checkbox" id="friday" name="efri" (change)="task.validateDaysChecked($event)"> Friday
+                                <input type="image" src="/assets/cancel.png" (click)="task.editFrequencyToggle(3)" class="icons" title="Cancel"><br><br>
+
+                                <label class="container">
+                                Monday 
+                                <input type="checkbox" id="monday" name="amon" (change)="task.validateDaysChecked($event)">
+                                <span class="checkmark"></span> 
+                                </label>
+
+                                <label class="container">
+                                Tuesday
+                                <input type="checkbox" id="tuesday" name="btue" (change)="task.validateDaysChecked($event)">
+                                <span class="checkmark"></span>
+                                </label>
+
+                                <label class="container">Wednesday
+                                <input type="checkbox" id="wednesday" name="cwed" (change)="task.validateDaysChecked($event)"> 
+                                <span class="checkmark"></span>
+                                </label>
+
+                                <label class="container">Thursday
+                                <input type="checkbox" id="thursday" name="dthu" (change)="task.validateDaysChecked($event)"> 
+                                <span class="checkmark"></span>
+                                </label>
+
+                                <label class="container">Friday
+                                <input type="checkbox" id="friday" name="efri" (change)="task.validateDaysChecked($event)"> 
+                                <span class="checkmark"></span>
+                                </label>
 
                             </li>
                         </ul>

@@ -26,7 +26,7 @@ export class AppComponent {
     password: new FormControl("")
   })
 
-  title = 'Classroom Task Manager';
+  title = 'Classroom Manager';
   teacherName = "N/A"
   welcomeMessage = ""
 
