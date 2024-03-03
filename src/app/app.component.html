@@ -1,6 +1,7 @@
 
 <div class="grid-container-one">
   <h1> {{ title }} </h1>
+  
           
           <form [formGroup] ="loginForm" (ngSubmit)="validateLogin()" class="loginform">
             <label for="username">Username: </label>
@@ -18,47 +19,22 @@
           </form>
          
  </div>
+ <div>
+  <input type="button"  class="right-space button" value="Add a Student" (click)="toggleCards(1)">
+  <input type="button"  class="right-space button" value="Critical Activites" (click)="toggleCards(2)">
+  <input type="button" class="right-space button" value="About Me" (click)="toggleCards(3)">
+</div>
  <hr class="accessory">           
-
-
+    
     <div *ngIf="beginApplication" class="left-margin right-margin">
-      <div class="grid-container-two">
-        <div class="form-display">
-          <div>
-            <p>{{ welcomeMessage }}</p>
-          </div>
-          <div>
-            <h3>Add New Student</h3>
-          </div>
-            <div>
-            <form [formGroup] ="studentForm" (ngSubmit)="addStudent()">
-              <label for="fname">Student Name</label><br>
-              <input type="text" id="fname" class="type" name="fname" formControlName="first_name"><br>
-              <div *ngIf="!nameExists" class="error">Student must have a name</div>
-              <label for="task">Task</label><br>
-              <input type="text" id="task" name="task" formControlName="task" class="type">
-              <div *ngIf="!taskExists" class="error">Student must have at least one task</div>
-              <br>
-              <input type="submit" class="submit button" value="Submit">
-            </form>
-          </div>
-        </div>
-        
-        <div>
-          
-        </div>
-        <div class="form-display">
-          <h3>Critical Tasks</h3>
-          <p>Nothing Due Today!</p>
-        </div> 
-      </div>
-        <app-student-roster class="task-roster" [enteredFirst] = enteredFirst [enteredTask] = enteredTask></app-student-roster>   
+        <app-student-roster class="task-roster" [enteredFirst] = enteredFirst [enteredTask] = enteredTask [addStudentOn] = addStudentOn 
+        [criticalActivitiesOn] = criticalActivitiesOn [aboutMeOn] = aboutMeOn></app-student-roster>   
       </div>
 
   
 
 
-<div *ngIf="!beginApplication"> 
+<div *ngIf="!beginApplication" class="form-display"> 
   <p>Please login to begin. For mock app the username is anything you want, and password is 123. You do not need to create an account.</p>
   <p>This app is intended for classroom teachers who want to better manage their classroom students and the tasks associated with them.</p>
   <p>Please note, due to FERPA (Family Education Rights and Privacy Act) it is crucial that you<strong> do not enter in any real student information.</strong>

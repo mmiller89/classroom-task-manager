@@ -16,10 +16,7 @@ export class AppComponent {
 
   @ViewChild(StudentRosterComponent) studentRoster: StudentRosterComponent
 
-  studentForm = new FormGroup({
-    first_name: new FormControl(""),
-    task: new FormControl("")
-  })
+
 
   loginForm = new FormGroup({
     username: new FormControl(""),
@@ -28,16 +25,33 @@ export class AppComponent {
 
   title = 'Classroom Manager';
   teacherName = "N/A"
-  welcomeMessage = ""
 
   
   enteredFirst = "";
   enteredTask = "";
-  nameExists = true;
-  taskExists = true;
+ 
   isEventsCritical = false;
   beginApplication = true;
   georgeEHarrisLogin = 528528;
+  addStudentOn = false;
+  criticalActivitiesOn = false;
+  aboutMeOn = false;
+
+  toggleCards(input: number){
+    if (input == 1){
+      this.addStudentOn = this.addStudentOn == true ? false : true;
+    }
+    else if (input == 2){
+      if (this.criticalActivitiesOn == false){
+        this.studentRoster.verifyCriticalUpdates();
+      }
+      this.criticalActivitiesOn = this.criticalActivitiesOn == true ? false : true;
+    }
+    else if (input == 3){
+      this.aboutMeOn = this.aboutMeOn == true ? false : true;
+    }
+   
+  }
 
   logout(){
     this.loginForm.reset();
@@ -47,40 +61,10 @@ export class AppComponent {
   validateLogin(){
     if (this.loginForm.value.password == "123"){
       this.teacherName = this.loginForm.value.username!;
-      this.welcomeMessage = `Welcome back ${this.teacherName}!`;
       this.beginApplication = true;
     } else {
       alert("Validation failed. Password is 123.")
     }
-  }
-
-  addStudent(){
-
-      this.enteredFirst = this.studentForm.value.first_name!;
-      this.enteredTask = this.studentForm.value.task!;
-      
-      if (this.enteredFirst == "" || this.enteredFirst == null){
-        this.nameExists = false;
-      } else {
-        this.nameExists = true;
-      }
-      
-      if (this.enteredTask == "" || this.enteredTask == null){
-        this.taskExists = false;
-      } else {
-        this.taskExists = true;
-      }
-
-      if (this.nameExists && this.taskExists) {
-        let array_of_tasks: Task[] = []
-        array_of_tasks.push(new Task(this.enteredTask, "None", 0, 0))
-        this.studentRoster.insertStudents(this.enteredFirst, array_of_tasks, 0)
-        this.studentForm.reset();
-        this.nameExists = true;
-      }
-      
-   
-      
   }
   
 }

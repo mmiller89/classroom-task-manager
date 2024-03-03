@@ -22,6 +22,28 @@ table {
     margin-top: 10px;
 }
 
+.grid-container-two {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: center;
+  
+}
+
+.flush-left{
+  text-align: left;
+}
+
+
+.form-display {
+  background-color: white;
+  padding: 50px;
+  border-radius: 10%;
+  box-shadow: 5px 5px 5px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 ul {
     list-style-type: none;
 }
@@ -89,6 +111,35 @@ ul {
   }
 
 
+  @media only screen and (max-width: 600px) {
+  
+    .form-display {
+      background-color: white;
+      padding: 10px;
+      border-radius: 10%;
+      box-shadow: 5px 5px 5px;
+      margin-right: 2px;
+      
+ 
+    }
+    .flush-mid{
+      align-items: center;
+    }
+    .grid-container-two {
+      display: flex;
+      flex-direction: row;
+      align-items: start;
+      justify-content: start;
+      
+    }
+
+    .icons {
+      width: 1.2em;
+      height: 1.2em;
+      margin-left: 5px;
+      margin-top: 5px;
+  }
+}
 
 
 

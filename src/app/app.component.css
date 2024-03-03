@@ -11,7 +11,8 @@ h1 {
     letter-spacing:-2px;
     font-size:2.5em;
     color: #4871a0;
-    text-shadow: 2px 2px 2px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    
     
 }
 hr {
@@ -36,35 +37,13 @@ hr {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
    
    
 
 }
-
-.grid-container-two {
-    display: flex;
-    flex-direction: row;
-    align-items: start;
-    justify-content: center;
-    
-}
-
-.form-display {
-   background-color: white;
-   padding: 50px;
-   border-radius: 10%;
-   box-shadow: 5px 5px 5px;
-   margin-left: 20px;
-   margin-right: 20px;
-   
-   
-}
-
-
-
 
 .right-space {
     margin-right: 20px;

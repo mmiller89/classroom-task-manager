@@ -1,25 +1,53 @@
-<!-- <div class="flex-container-three">
-    Today's Date is {{ todaysDateDisplay }}<br><br>
-    <div class="margin-right">Critical Events (Due Today)</div><br>
-    <div *ngIf="studentsWithCriticalTasks.length <= 0">Nothing. Good job!</div>
+<strong>Today's Date is {{ todaysDateDisplay }}</strong><br><br>
+<div class="grid-container-two">
+    <div class="form-display" *ngIf="addStudentOn">
+  
+        
+      <div>
+        <h3>New Student</h3>
+      </div>
+        <div>
+        <form [formGroup] ="studentForm" (ngSubmit)="addStudent()">
+          <label for="fname">Student Name</label><br>
+          <input type="text" id="fname" class="type" name="fname" formControlName="first_name"><br>
+          <div *ngIf="!nameExists" class="error">Student must have a name</div>
+          <label for="task">Task</label><br>
+          <input type="text" id="task" name="task" formControlName="task" class="type">
+          <div *ngIf="!taskExists" class="error">Student must have at least one task</div>
+          <br>
+          <input type="submit" class="submit button" value="Submit">
+        </form>
+      </div>
+    </div>
+    
+    <div>
+      
+    </div>
+    <div class="form-display" *ngIf="criticalActivitiesOn">
+      <h3>Critical Tasks</h3>
+      <div *ngIf="studentsWithCriticalTasks.length <= 0">Nothing. Good job!</div>
     <div *ngIf="studentsWithCriticalTasks.length > 0">
         <ul>
-            <li *ngFor="let student of studentsWithCriticalTasks">{{student.name}}
-                <ol>
+            <li *ngFor="let student of studentsWithCriticalTasks"><u>{{student.name}}</u>
+                <ul>
                     <li *ngFor="let task of student.criticalTasks">{{task}}</li>
-                </ol>
+                </ul>
             </li>
             
         </ul>
     </div>
     <div><button (click)="dayMinusOne()" class="button">Day -1</button><button (click)="dayPlusOne()" class="button">Day +1</button></div>
-</div>
-<br> -->
+    </div> 
+    <div class="form-display" *ngIf="aboutMeOn">
+      <h3>Michael Miller</h3>
+      <p>Fill Information in Here</p>
+    </div> 
+  </div>
 
 
 <div>
     <br>
-    <table border = "3" *ngIf="studentList.length > 0" class="blue">
+    <table border = "3" *ngIf="studentList.length > 0" class="blue flush-left">
         <thead>
             <tr>
                 <th>Student Name</th>
@@ -74,7 +102,7 @@
 
                     <td *ngIf="student.tasks.length > 0">
                         <ul class="nodot" id="space-between-tasks" *ngFor="let task of student.tasks" [ngSwitch]="task.displayFrequencyTask">
-                            <li *ngSwitchCase="0">Configure Task With <img src="/assets/taskadd.png" class="icons"></li>
+                            <li *ngSwitchCase="0">Configure Task <img src="/assets/taskadd.png" class="icons flush-mid"></li>
                             <li *ngSwitchCase="1"> 
                                     <strong>Frequency of Task </strong><br> 
                                     <select #times name="times" id="times" class="selector" (change)="task.onSelectFrequency(times.value)">
@@ -99,7 +127,9 @@
                                     
                                 </form> 
                             </li>
-                            <li *ngSwitchCase="3">||{{task.frequency}}|| <strong>Next Event: </strong>{{ task.nextEventDisplay }}</li>
+                            <li *ngSwitchCase="3">
+                                <strong>Next Event: </strong>{{ task.nextEventDisplay }}<br>
+                                <strong>Frequency: </strong> {{task.frequency}}</li>
                             <li *ngSwitchCase="4">Due Date - {{task.nextEventDisplay}}</li>
                             <li *ngSwitchCase="5">
                                 Weekly Schedule - Check Days 

@@ -19,6 +19,9 @@ export class StudentRosterComponent {
 
     @Input() enteredFirst: string;
     @Input() enteredTask: string;
+    @Input() addStudentOn: boolean;
+    @Input()criticalActivitiesOn: boolean;
+    @Input() aboutMeOn: boolean;
    
 
     edit_task_name = new FormGroup({
@@ -37,6 +40,11 @@ export class StudentRosterComponent {
       dateSelected: new FormControl("")
     })
 
+    studentForm = new FormGroup({
+      first_name: new FormControl(""),
+      task: new FormControl("")
+    })
+
  
     
     //Insert testing data//
@@ -53,8 +61,47 @@ export class StudentRosterComponent {
     Ash = new Student("Ash K", [this.taskFive, this.taskSix], "3", 0)
     studentList: Student[] = [this.Michael, this.Andrea, this.Ash]
     studentsWithCriticalTasks: Student[] = []
+    nameExists = true;
+    taskExists = true;
     
     //Insert testing data
+
+
+
+   
+  
+ 
+    addStudent(){
+
+      this.enteredFirst = this.studentForm.value.first_name!;
+      this.enteredTask = this.studentForm.value.task!;
+      
+      if (this.enteredFirst == "" || this.enteredFirst == null){
+        this.nameExists = false;
+      } else {
+        this.nameExists = true;
+      }
+      
+      if (this.enteredTask == "" || this.enteredTask == null){
+        this.taskExists = false;
+      } else {
+        this.taskExists = true;
+      }
+
+      if (this.nameExists && this.taskExists) {
+        let array_of_tasks: Task[] = []
+        array_of_tasks.push(new Task(this.enteredTask, "None", 0, 0))
+        this.insertStudents(this.enteredFirst, array_of_tasks, 0)
+      } 
+      else if (this.nameExists) {
+        this.insertStudents(this.enteredFirst, [], 0)
+      }
+      
+   
+      
+  }
+
+
 
 
   //For Testing Purpose Only
