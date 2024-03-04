@@ -18,6 +18,7 @@ export class Task {
   public days_array: any;
   public temp_task_custom = new Set();
   public displayCustomFreq: string;
+  public displayShownFrequency: number = 6;
   
 
   constructor (public taskName: string, public frequency: string, public displayEditTask: number, public displayFrequencyTask: number){
@@ -28,6 +29,9 @@ export class Task {
     this.displayEditTask = num;
   }
 
+  editShownFrequency(num: number){
+    this.displayShownFrequency = num;
+  }
   editFrequencyToggle(num: number){
     this.displayFrequencyTask = num;
   }

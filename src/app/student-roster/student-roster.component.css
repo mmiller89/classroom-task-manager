@@ -9,6 +9,7 @@ button {
 
 table {
     width: 100%; 
+    text-align: center;
 }
 
 .nodot {
@@ -22,6 +23,27 @@ table {
     margin-top: 10px;
 }
 
+
+.icons-small {
+  width: 2.0em;
+  height: 2.0em;
+  margin-left: 10px;
+    margin-top: 10px;
+}
+
+.aboutme {
+  max-width: 200px;
+}
+
+.aboutme > img {
+  height: auto;
+  width: 50%;
+  border-radius: 10%;
+}
+
+.aboutme > a {
+  margin-right: 10px;
+}
 .grid-container-two {
   display: flex;
   flex-direction: row;
@@ -30,9 +52,6 @@ table {
   
 }
 
-.flush-left{
-  text-align: left;
-}
 
 
 .form-display {
@@ -81,7 +100,9 @@ ul {
     left: 0;
     height: 25px;
     width: 25px;
-    background-color: #eee;
+    background-color: #ffffff;
+    border: solid black;
+    border-radius: 10%;
   }
   
 
@@ -110,9 +131,15 @@ ul {
     display: block;
   }
 
+  .centercontent {
+    text-align: center;
+  }
+
 
   @media only screen and (max-width: 600px) {
-  
+    table {
+      text-align: left;
+    }
     .form-display {
       background-color: white;
       padding: 10px;

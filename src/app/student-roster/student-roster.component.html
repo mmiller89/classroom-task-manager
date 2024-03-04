@@ -1,7 +1,14 @@
-<strong>Today's Date is {{ todaysDateDisplay }}</strong><br><br>
+<strong>Welcome {{welcomeMessage}}! Today is {{ todaysDateDisplay }}</strong><br><br>
 <div class="grid-container-two">
     <div class="form-display" *ngIf="addStudentOn">
   
+
+
+        <!-- TO-DO
+        1. Hide/Show all icons in table.
+        2. Hide/Show all frequencies.
+        3. Filter students (maybe alphabetically, by tasks coming up tomorrow, by similar tasks)
+        4. Disable frequency button maybe. -->
         
       <div>
         <h3>New Student</h3>
@@ -38,9 +45,13 @@
     </div>
     <div><button (click)="dayMinusOne()" class="button">Day -1</button><button (click)="dayPlusOne()" class="button">Day +1</button></div>
     </div> 
-    <div class="form-display" *ngIf="aboutMeOn">
+    <div class="form-display aboutme" *ngIf="aboutMeOn">
+        <img src="/assets/profile.jpg">
       <h3>Michael Miller</h3>
-      <p>Fill Information in Here</p>
+      <p>Entry level Software Engineer looking for internships and junior level work.</p>
+        <a href="https://www.linkedin.com/in/michaelpmiller89/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/mmiller89" target="_blank">GitHub</a>
+        <a href="https://s3.amazonaws.com/handshake.production/documents/documents/044/859/648/original/MichaelMiller_Resume.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2HSNSGACXF6KKT2H%2F20240304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240304T002103Z&X-Amz-Expires=10&X-Amz-SignedHeaders=host&X-Amz-Signature=626b64ddda90cf6525ff7b9776e966f9c978cdf20dd2114496c4bdc01bac688b" target="_blank">Resume</a>
     </div> 
   </div>
 
@@ -50,14 +61,14 @@
     <table border = "3" *ngIf="studentList.length > 0" class="blue flush-left">
         <thead>
             <tr>
-                <th>Student Name</th>
+                <th>Student Name <input type="radio"></th>
                 <th>Task</th>
                 <th>Task Manager</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let student of studentList">
-                <td [ngSwitch]="student.displayEditStudent">
+                <td [ngSwitch]="student.displayEditStudent" class="centercontent">
                     <div *ngSwitchCase="0">{{ student.name }}<br>
                         <input type="image" src="/assets/edit.png" (click)="student.editStudentToggle(1)" class="icons" title="Edit Student">
                         <input type="image" src="/assets/delete.png" (click)="deleteStudent(student)" class="icons" title="Delete Student" >
@@ -79,14 +90,17 @@
                         </form>
                     </div>
                 </td>
+                
                     <td *ngIf="student.tasks.length > 0">
+                        
                     <ul id="space-between-tasks" *ngFor="let task of student.tasks" [ngSwitch]="task.displayEditTask">
+                        
                         <li *ngSwitchCase="0" >{{ task.taskName }}<br>
                             <input type="image" src="/assets/edit.png" (click)="task.editTaskToggle(1)" class="icons" title="Edit Task">
                             <input type="image" src="/assets/delete.png" (click)="student.deleteTask(task)" class="icons" title="Delete Task">
                             <input type="image" src="/assets/taskadd.png" (click)="task.editFrequencyToggle(1)" class="icons" title="Setup Task Manager">
-                            
                         </li>
+                        
                         <li *ngSwitchCase="1">
                             <form [formGroup] ="edit_task_name" (ngSubmit)="sendEditedTask(student, task)">
                                 <input type="text" id="edit_task" name="edit_task" placeholder="{{task.taskName}}" class="type" formControlName="valueEntered">
@@ -97,12 +111,14 @@
                                 
                             </li>
                         </ul>
+                        
                     </td>
-                    <td *ngIf="student.tasks.length <= 0">Add A Task With <img src="/assets/add.png" class="icons"></td>
-
+                     
+                    <td *ngIf="student.tasks.length <= 0">Add A Task With <img src="/assets/add.png" class="icons-small"></td>
+                    
                     <td *ngIf="student.tasks.length > 0">
                         <ul class="nodot" id="space-between-tasks" *ngFor="let task of student.tasks" [ngSwitch]="task.displayFrequencyTask">
-                            <li *ngSwitchCase="0">Configure Task <img src="/assets/taskadd.png" class="icons flush-mid"></li>
+                            <li *ngSwitchCase="0">Configure Task <img src="/assets/taskadd.png" class="icons-small flush-mid"></li>
                             <li *ngSwitchCase="1"> 
                                     <strong>Frequency of Task </strong><br> 
                                     <select #times name="times" id="times" class="selector" (change)="task.onSelectFrequency(times.value)">
@@ -124,13 +140,35 @@
                                     <input type="date" id="task_date" name="task_date" class="selector" formControlName="dateSelected">
                                     <input type="image" src="/assets/check.png" class="login submit icons" value="Submit" title="Submit Date">
                                     <input type="image" src="/assets/cancel.png" (click)="task.editFrequencyToggle(1)" class="icons" title="Cancel">
-                                    
                                 </form> 
                             </li>
                             <li *ngSwitchCase="3">
-                                <strong>Next Event: </strong>{{ task.nextEventDisplay }}<br>
-                                <strong>Frequency: </strong> {{task.frequency}}</li>
-                            <li *ngSwitchCase="4">Due Date - {{task.nextEventDisplay}}</li>
+                                <strong>Due Date: </strong>{{ task.nextEventDisplay }}
+                                <div [ngSwitch]="task.displayShownFrequency">
+                                <li *ngSwitchCase="6">
+                                    <input type="image" src="/assets/frequency.png" (click)="task.editShownFrequency(7)" class="icons" title="Check Frequency">
+                                    <input type="image" src="/assets/right-arrow.png"  class="icons" title="Move Due Date">
+                                </li>
+                                <li *ngSwitchCase="7">
+                                    <strong>Frequency: </strong> {{task.frequency}}
+                                    <input type="image" src="/assets/cancel.png" (click)="task.editShownFrequency(6)" class="icons-small" title="Go Back">
+                                </li>
+                                </div>
+                               
+                            </li>
+                               
+                            <li *ngSwitchCase="4"><strong>Due Date:</strong> {{task.nextEventDisplay}}
+                                <div [ngSwitch]="task.displayShownFrequency">
+                                <li *ngSwitchCase="6">
+                                    <input type="image" src="/assets/frequency.png" (click)="task.editShownFrequency(7)" class="icons" title="Check Frequency">
+                                    <input type="image" src="/assets/right-arrow.png"  class="icons" title="Move Due Date">
+                                </li>
+                                <li *ngSwitchCase="7">
+                                    <strong>Frequency: </strong> {{task.frequency}}
+                                    <input type="image" src="/assets/cancel.png" (click)="task.editShownFrequency(6)" class="icons-small" title="Go Back">
+                                </li>
+                                </div>
+                            </li>
                             <li *ngSwitchCase="5">
                                 Weekly Schedule - Check Days 
                                 <input type="image" src="/assets/check.png" (click)="logDate(task, true)" class="submit icons">

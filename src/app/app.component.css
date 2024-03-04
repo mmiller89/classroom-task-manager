@@ -2,6 +2,14 @@
     color: red;
 }
 
+.warning-text{
+    background-color:rgba(42, 46, 44, 0.966);
+    padding: 50px;
+    color: white;
+    border-radius: 10px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    max-width: 800px;
+}
 
 
 h1 {

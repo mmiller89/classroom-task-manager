@@ -22,6 +22,7 @@ export class StudentRosterComponent {
     @Input() addStudentOn: boolean;
     @Input()criticalActivitiesOn: boolean;
     @Input() aboutMeOn: boolean;
+    @Input() welcomeMessage: any;
    
 
     edit_task_name = new FormGroup({

@@ -29,7 +29,7 @@ export class AppComponent {
   
   enteredFirst = "";
   enteredTask = "";
- 
+  welcomeMessage: any;
   isEventsCritical = false;
   beginApplication = true;
   georgeEHarrisLogin = 528528;
@@ -59,11 +59,17 @@ export class AppComponent {
   }
 
   validateLogin(){
-    if (this.loginForm.value.password == "123"){
+    let user = this.loginForm.value.username
+    if (user == null || user == undefined || user == ""){
+      alert("Login failed. Please provide a username.")
+    }
+    else if (this.loginForm.value.password == "123"){
       this.teacherName = this.loginForm.value.username!;
+      this.welcomeMessage = this.loginForm.value.username;
       this.beginApplication = true;
-    } else {
-      alert("Validation failed. Password is 123.")
+    } 
+    else {
+      alert("Login failed. Password is 123.")
     }
   }
   

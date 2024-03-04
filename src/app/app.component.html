@@ -28,13 +28,13 @@
     
     <div *ngIf="beginApplication" class="left-margin right-margin">
         <app-student-roster class="task-roster" [enteredFirst] = enteredFirst [enteredTask] = enteredTask [addStudentOn] = addStudentOn 
-        [criticalActivitiesOn] = criticalActivitiesOn [aboutMeOn] = aboutMeOn></app-student-roster>   
+        [criticalActivitiesOn] = criticalActivitiesOn [aboutMeOn] = aboutMeOn [welcomeMessage] = welcomeMessage></app-student-roster>   
       </div>
 
   
 
 
-<div *ngIf="!beginApplication" class="form-display"> 
+<div *ngIf="!beginApplication" class="form-display warning-text"> 
   <p>Please login to begin. For mock app the username is anything you want, and password is 123. You do not need to create an account.</p>
   <p>This app is intended for classroom teachers who want to better manage their classroom students and the tasks associated with them.</p>
   <p>Please note, due to FERPA (Family Education Rights and Privacy Act) it is crucial that you<strong> do not enter in any real student information.</strong>
