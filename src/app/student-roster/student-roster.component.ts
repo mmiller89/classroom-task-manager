@@ -67,37 +67,56 @@ export class StudentRosterComponent {
     taskExists = true;
     displayStudentIcons = true;
     displayTaskIcons = true;
+    displayTasksAll = true;
+    studentSortDropDown = "Select";
     
     //Insert testing data
+
+    checkShowFrequencyIcon(event: any){
+      this.displayTasksAll = event.target.checked ? false : true;
+    }
 
 
     filterTaskList(event: any){
       if (event == "alphabetically"){
-        //Left off here.
+        for (let student of this.studentList){
+          let task = student.tasks
+            task.sort(function(a: Task, b: Task) {
+            return ((a.taskName < b.taskName) ? -1 : ((a.taskName > b.taskName) ? 1 : 0));
+        })
+        }
+      }
+      else if (event == "highest"){
+        for (let student of this.studentList){
+          let task = student.tasks
+            task.sort(function(a: Task, b: Task) {
+            return ((a.nextEvent < b.nextEvent) ? -1 : ((a.nextEvent > b.nextEvent) ? 1 : 0));
+        })
+        }
+
       }
     }
 
-    taskSort(student: Student){
-        
-    }
+   
 
-    filterStudentList(event: any){
-      if (event == "alphabetically"){
+    filterStudentList(stringVal: any){
+      if (stringVal == "alphabetically"){
+        
         this.studentList.sort(function(a: Student, b: Student) {
           return ((a.name < b.name) ? -1 : ((a.name > b.name) ? 1 : 0));
       })
       }
-      else if (event == "lowest"){
+      else if (stringVal == "lowest"){
         this.studentList.sort(function(a: Student, b: Student) { 
           return a.tasks.length - b.tasks.length;
       })
       }
-      else if (event == "highest"){
+      else if (stringVal == "highest"){
         this.studentList.sort(function(a: Student, b: Student) { 
           return b.tasks.length - a.tasks.length;
       })
       }
-      else if (event == "starred"){
+      else if (stringVal == "starred"){
         this.studentList.sort(function(a: Student, b:Student){
           let aValue = a.starChecked ? 1 : 0;
           let bValue = b.starChecked ? 1 : 0;
@@ -105,6 +124,8 @@ export class StudentRosterComponent {
           return bValue - aValue;
         })
       }
+      
+     
     }
    
     checkShowStudentIcon(event: any){
@@ -171,7 +192,7 @@ export class StudentRosterComponent {
       date = task.nextEvent;
       task.nextEvent = task.weekendAdjust(date);
     } 
-    else if (task.frequency == "Alternate"){
+    else if (task.frequency == "Every Other Day"){
       task.nextEvent = format(new Date(addDays(task.nextEvent, 2)), 'MMMM/dd/yyyy');
       date = task.nextEvent;
       task.nextEvent = task.weekendAdjust(date);
@@ -181,7 +202,7 @@ export class StudentRosterComponent {
       date = task.nextEvent;
       task.nextEvent = task.weekendAdjust(date);
     } 
-    else if (task.frequency == "Biweekly"){
+    else if (task.frequency == "Every Other Week"){
       task.nextEvent = format(new Date(addWeeks(task.nextEvent, 2)), 'MMMM/dd/yyyy');
       date = task.nextEvent;
       task.nextEvent = task.weekendAdjust(date);

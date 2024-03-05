@@ -84,19 +84,19 @@ export class Task {
   
       for (let i of sortedArray){
         if (i == "amon"){
-          stringFreq += "M/";
+          stringFreq += "Mon/";
         }
         else if(i == "btue"){
-          stringFreq += "T/";
+          stringFreq += "Tue/";
         }
         else if(i == "cwed"){
-          stringFreq += "W/";
+          stringFreq += "Wed/";
         }
         else if(i == "dthu"){
-          stringFreq += "TH/";
+          stringFreq += "Thu/";
         }
         else if(i == "efri"){
-          stringFreq += "F/";
+          stringFreq += "Fri/";
         }
       }
   

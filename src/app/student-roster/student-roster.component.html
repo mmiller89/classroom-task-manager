@@ -1,4 +1,5 @@
-<strong>Welcome {{welcomeMessage}}! Today is {{ todaysDateDisplay }}</strong><br><br>
+
+<strong>Today is {{ todaysDateDisplay }}</strong><br><br>
 <div class="grid-container-two">
     <div class="form-display" *ngIf="addStudentOn">
   
@@ -62,7 +63,7 @@
                 <th>Student Name <span class="th-head">Hide Icons<input type="checkbox" (click)="checkShowStudentIcon($event)"></span>
                     <span class="th-head">Filter By
                         <select #sortstudent name="sortstudent" id="sortstudent" class="selector" (change)="filterStudentList(sortstudent.value)">
-                            <option value="No Change">Select</option>
+                            <option  value="Select" selected disabled>Select</option>
                             <option value="alphabetically">Alphabetically</option> 
                             <option value="highest">Amount of Tasks(Highest)</option> 
                             <option value="lowest">Amount of Tasks(Lowest)</option> 
@@ -72,18 +73,22 @@
                 </th>
                 <th>Task 
                     <span class="th-head">Hide Icons<input type="checkbox" (click)="checkShowTaskIcon($event)"></span>
-                    <!-- <span class="th-head">Filter By
+                    <span class="th-head">Filter By
                         <select #sorttask name="sorttask" id="sorttask" class="selector" (change)="filterTaskList(sorttask.value)">
-                            <option value="No Change">Select</option>
+                            <option selected="selected" value="No Change" selected disabled>Select</option>
                             <option value="alphabetically">Alphabetically</option> 
                             <option value="highest">Closest Due Date</option>
                         </select>
-                    </span> -->
+                    </span>
                     
                                                                                  
                     
                 </th>
-                <th>Task Manager</th>
+                <th>Task Manager
+                    <span class="th-head">Hide Frequency<input type="checkbox" (click)="checkShowFrequencyIcon($event)">
+                        <input type="image" src="/assets/frequency.png" class="icons-small" title="Check Frequency">
+                    </span>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -146,7 +151,9 @@
                     
                     <td *ngIf="student.tasks.length > 0">
                         <ul class="nodot" id="space-between-tasks" *ngFor="let task of student.tasks" [ngSwitch]="task.displayFrequencyTask">
-                            <li *ngSwitchCase="0">Configure Task <img src="/assets/taskadd.png" class="icons-small flush-mid"></li>
+                            <div class="task-align">
+                                <li *ngSwitchCase="0">Configure Task <img src="/assets/taskadd.png" class="icons-small"></li>
+                            </div>
                             <li *ngSwitchCase="1"> 
                                     <strong>Frequency of Task </strong><br> 
                                     <select #times name="times" id="times" class="selector" (change)="task.onSelectFrequency(times.value)">
@@ -154,9 +161,9 @@
                                         <option value="No Change">No Change</option>
                                         <option value="Once">Only Once</option> 
                                         <option value="Daily">Once A Day (Weekdays Only)</option> 
-                                        <option value="Alternate">Every Other Day (Weekdays Only)</option> 
+                                        <option value="Every Other Day">Every Other Day (Weekdays Only)</option> 
                                         <option value="Weekly">Once A Week</option> 
-                                        <option value="Biweekly">Every other week</option> 
+                                        <option value="Every Other Week">Every Other week</option> 
                                         <option value="Monthly">Once A Month</option>
                                         <option value="Custom">Custom Schedule</option>
                                     </select>                                                               
@@ -174,12 +181,8 @@
                                 <strong>Due Date: </strong>{{ task.nextEventDisplay }}
                                 <div [ngSwitch]="task.displayShownFrequency">
                                 <li *ngSwitchCase="6">
-                                    <input type="image" src="/assets/frequency.png" (click)="task.editShownFrequency(7)" class="icons" title="Check Frequency">
-                                    <input type="image" src="/assets/right-arrow.png"  class="icons" title="Move Due Date">
-                                </li>
-                                <li *ngSwitchCase="7">
-                                    <strong>Frequency: </strong> {{task.frequency}}
-                                    <input type="image" src="/assets/cancel.png" (click)="task.editShownFrequency(6)" class="icons-small" title="Go Back">
+                                    <div *ngIf="displayTasksAll"><img src="/assets/frequency.png" class="icons-small"> {{task.frequency}}</div>
+                                    
                                 </li>
                                 </div>
                                
@@ -188,12 +191,7 @@
                             <li *ngSwitchCase="4"><strong>Due Date:</strong> {{task.nextEventDisplay}}
                                 <div [ngSwitch]="task.displayShownFrequency">
                                 <li *ngSwitchCase="6">
-                                    <input type="image" src="/assets/frequency.png" (click)="task.editShownFrequency(7)" class="icons" title="Check Frequency">
-                                    <input type="image" src="/assets/right-arrow.png"  class="icons" title="Move Due Date">
-                                </li>
-                                <li *ngSwitchCase="7">
-                                    <strong>Frequency: </strong> {{task.frequency}}
-                                    <input type="image" src="/assets/cancel.png" (click)="task.editShownFrequency(6)" class="icons-small" title="Go Back">
+                                    <div *ngIf="displayTasksAll"><img src="/assets/frequency.png" class="icons-small"> {{task.frequency}}</div>
                                 </li>
                                 </div>
                             </li>
@@ -203,28 +201,28 @@
                                 <input type="image" src="/assets/cancel.png" (click)="task.editFrequencyToggle(3)" class="icons" title="Cancel"><br><br>
 
                                 <label class="container">
-                                Monday 
+                                Mon 
                                 <input type="checkbox" id="monday" name="amon" (change)="task.validateDaysChecked($event)">
                                 <span class="checkmark"></span> 
                                 </label>
 
                                 <label class="container">
-                                Tuesday
+                                Tue
                                 <input type="checkbox" id="tuesday" name="btue" (change)="task.validateDaysChecked($event)">
                                 <span class="checkmark"></span>
                                 </label>
 
-                                <label class="container">Wednesday
+                                <label class="container">Wed
                                 <input type="checkbox" id="wednesday" name="cwed" (change)="task.validateDaysChecked($event)"> 
                                 <span class="checkmark"></span>
                                 </label>
 
-                                <label class="container">Thursday
+                                <label class="container">Thu
                                 <input type="checkbox" id="thursday" name="dthu" (change)="task.validateDaysChecked($event)"> 
                                 <span class="checkmark"></span>
                                 </label>
 
-                                <label class="container">Friday
+                                <label class="container">Fri
                                 <input type="checkbox" id="friday" name="efri" (change)="task.validateDaysChecked($event)"> 
                                 <span class="checkmark"></span>
                                 </label>
