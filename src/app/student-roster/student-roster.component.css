@@ -135,6 +135,30 @@ ul {
     text-align: center;
   }
 
+  .star:hover{
+    display: inline-block;
+    animation: rotation 5s infinite linear;
+  }
+  
+  @keyframes rotation {
+    50% {
+      transform: rotate(360deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  .th-head {
+    
+    border-radius: 30% 30% 0% 0%;
+    margin-left: 20px;
+    font-size: 0.6em;
+    padding: 5px;
+    letter-spacing:0.5px;
+    color: #EDF7F6;
+    text-shadow: none;
+  }
 
   @media only screen and (max-width: 600px) {
     table {

@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Task } from './task/task.component';
+import { AnyARecord } from 'node:dns';
 
 
 @Component({
@@ -29,8 +30,13 @@ export class Student {
       }
 
     
-      public criticalTasks = new Set<string>;
-
+      criticalTasks = new Set<string>;
+      starChecked = false;
+      
+      switchStar(){
+        this.starChecked = this.starChecked == false ? true : false;
+      }
+    
       updateCriticalTasks(taskName: string, isToday: boolean){
         if (isToday){
           this.criticalTasks.add(taskName)

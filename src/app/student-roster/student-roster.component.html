@@ -5,8 +5,6 @@
 
 
         <!-- TO-DO
-        1. Hide/Show all icons in table.
-        2. Hide/Show all frequencies.
         3. Filter students (maybe alphabetically, by tasks coming up tomorrow, by similar tasks)
         4. Disable frequency button maybe. -->
         
@@ -61,18 +59,46 @@
     <table border = "3" *ngIf="studentList.length > 0" class="blue flush-left">
         <thead>
             <tr>
-                <th>Student Name <input type="radio"></th>
-                <th>Task</th>
+                <th>Student Name <span class="th-head">Hide Icons<input type="checkbox" (click)="checkShowStudentIcon($event)"></span>
+                    <span class="th-head">Filter By
+                        <select #sortstudent name="sortstudent" id="sortstudent" class="selector" (change)="filterStudentList(sortstudent.value)">
+                            <option value="No Change">Select</option>
+                            <option value="alphabetically">Alphabetically</option> 
+                            <option value="highest">Amount of Tasks(Highest)</option> 
+                            <option value="lowest">Amount of Tasks(Lowest)</option> 
+                            <option value="starred">Starred</option> 
+                        </select>
+                    </span>
+                </th>
+                <th>Task 
+                    <span class="th-head">Hide Icons<input type="checkbox" (click)="checkShowTaskIcon($event)"></span>
+                    <!-- <span class="th-head">Filter By
+                        <select #sorttask name="sorttask" id="sorttask" class="selector" (change)="filterTaskList(sorttask.value)">
+                            <option value="No Change">Select</option>
+                            <option value="alphabetically">Alphabetically</option> 
+                            <option value="highest">Closest Due Date</option>
+                        </select>
+                    </span> -->
+                    
+                                                                                 
+                    
+                </th>
                 <th>Task Manager</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let student of studentList">
                 <td [ngSwitch]="student.displayEditStudent" class="centercontent">
-                    <div *ngSwitchCase="0">{{ student.name }}<br>
-                        <input type="image" src="/assets/edit.png" (click)="student.editStudentToggle(1)" class="icons" title="Edit Student">
-                        <input type="image" src="/assets/delete.png" (click)="deleteStudent(student)" class="icons" title="Delete Student" >
-                        <input type="image" src="/assets/add.png" (click)="student.editStudentToggle(2)" class="icons" title="Add Task To Student"></div>
+                    <div *ngSwitchCase="0" [ngSwitch]="displayStudentIcons">
+                        {{ student.name }}<br>
+                        <div *ngSwitchCase="true">
+                            <img *ngIf="!student.starChecked "src="/assets/white-star.png" class="icons-small star" (click)="student.switchStar()">
+                            <img *ngIf="student.starChecked "src="/assets/yellow-star.png" class="icons-small star" (click)="student.switchStar()">
+                            <input type="image" src="/assets/edit.png" (click)="student.editStudentToggle(1)" class="icons" title="Edit Student">
+                            <input type="image" src="/assets/delete.png" (click)="deleteStudent(student)" class="icons" title="Delete Student" >
+                            <input type="image" src="/assets/add.png" (click)="student.editStudentToggle(2)" class="icons" title="Add Task To Student">
+                        </div>
+                    </div>
                     <div *ngSwitchCase="1">
                         <form [formGroup] ="edit_student_name" (ngSubmit)="sendEditedStudentName(student)">
                             <input type="text" id="edit_student_name" name="edit_student_name" placeholder="{{student.name}}" formControlName="studentValueEntered" class="type">
@@ -95,10 +121,12 @@
                         
                     <ul id="space-between-tasks" *ngFor="let task of student.tasks" [ngSwitch]="task.displayEditTask">
                         
-                        <li *ngSwitchCase="0" >{{ task.taskName }}<br>
-                            <input type="image" src="/assets/edit.png" (click)="task.editTaskToggle(1)" class="icons" title="Edit Task">
-                            <input type="image" src="/assets/delete.png" (click)="student.deleteTask(task)" class="icons" title="Delete Task">
-                            <input type="image" src="/assets/taskadd.png" (click)="task.editFrequencyToggle(1)" class="icons" title="Setup Task Manager">
+                        <li *ngSwitchCase="0" [ngSwitch]="displayTaskIcons">{{ task.taskName }}<br>
+                            <div *ngSwitchCase="true">
+                                <input type="image" src="/assets/edit.png" (click)="task.editTaskToggle(1)" class="icons" title="Edit Task">
+                                <input type="image" src="/assets/delete.png" (click)="student.deleteTask(task)" class="icons" title="Delete Task">
+                                <input type="image" src="/assets/taskadd.png" (click)="task.editFrequencyToggle(1)" class="icons" title="Setup Task Manager">
+                            </div>
                         </li>
                         
                         <li *ngSwitchCase="1">

@@ -23,6 +23,7 @@ export class StudentRosterComponent {
     @Input()criticalActivitiesOn: boolean;
     @Input() aboutMeOn: boolean;
     @Input() welcomeMessage: any;
+
    
 
     edit_task_name = new FormGroup({
@@ -64,13 +65,57 @@ export class StudentRosterComponent {
     studentsWithCriticalTasks: Student[] = []
     nameExists = true;
     taskExists = true;
+    displayStudentIcons = true;
+    displayTaskIcons = true;
     
     //Insert testing data
 
 
+    filterTaskList(event: any){
+      if (event == "alphabetically"){
+        //Left off here.
+      }
+    }
 
+    taskSort(student: Student){
+        
+    }
+
+    filterStudentList(event: any){
+      if (event == "alphabetically"){
+        this.studentList.sort(function(a: Student, b: Student) {
+          return ((a.name < b.name) ? -1 : ((a.name > b.name) ? 1 : 0));
+      })
+      }
+      else if (event == "lowest"){
+        this.studentList.sort(function(a: Student, b: Student) { 
+          return a.tasks.length - b.tasks.length;
+      })
+      }
+      else if (event == "highest"){
+        this.studentList.sort(function(a: Student, b: Student) { 
+          return b.tasks.length - a.tasks.length;
+      })
+      }
+      else if (event == "starred"){
+        this.studentList.sort(function(a: Student, b:Student){
+          let aValue = a.starChecked ? 1 : 0;
+          let bValue = b.starChecked ? 1 : 0;
+          
+          return bValue - aValue;
+        })
+      }
+    }
    
-  
+    checkShowStudentIcon(event: any){
+      this.displayStudentIcons = event.target.checked ? false : true;
+    }
+
+    checkShowTaskIcon(event: any){
+      this.displayTaskIcons = event.target.checked ? false : true;
+    }
+
+    
  
     addStudent(){
 

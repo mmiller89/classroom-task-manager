@@ -5,6 +5,7 @@
 <a href="https://www.flaticon.com/free-icons/cancel" title="cancel icons">Cancel icons created by Alfredo Hernandez - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/radio" title="radio icons">Radio icons created by icon_small - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/month" title="month icons">Month icons created by Flat Icons - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/blank" title="blank icons">Blank icons created by Freepik - Flaticon</a>
 
 https://codepen.io/joeyhoer/pen/AgbXOj
 https://cdn5.vectorstock.com/i/1000x1000/68/54/cartoon-school-classroom-vector-20556854.jpg
