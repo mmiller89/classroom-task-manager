@@ -8,8 +8,10 @@ button {
 }
 
 table {
-    width: 100%; 
+  
+    width: 90%; 
     text-align: center;
+    margin: auto;
 }
 
 .nodot {
@@ -22,6 +24,37 @@ table {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.student-name{
+  font-size: 1.4em;
+  font-weight: 400;
+  
+  
+}
+
+.updown {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+
+.up{
+margin-bottom: 40px;
+}
+
+.down{
+  margin-top: 40px;
+}
+
+
+
+.updown > input:hover {
+  background-color: yellow;
+  border-radius: 30%;
 }
 
 

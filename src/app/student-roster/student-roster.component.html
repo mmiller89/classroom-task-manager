@@ -3,11 +3,6 @@
 <div class="grid-container-two">
     <div class="form-display" *ngIf="addStudentOn">
   
-
-
-        <!-- TO-DO
-        3. Filter students (maybe alphabetically, by tasks coming up tomorrow, by similar tasks)
-        4. Disable frequency button maybe. -->
         
       <div>
         <h3>New Student</h3>
@@ -61,7 +56,7 @@
         <thead>
             <tr>
                 <th>Student Name <span class="th-head">Hide Icons<input type="checkbox" (click)="checkShowStudentIcon($event)"></span>
-                    <span class="th-head">Filter By
+                    <span class="th-head">Filter
                         <select #sortstudent name="sortstudent" id="sortstudent" class="selector" (change)="filterStudentList(sortstudent.value)">
                             <option  value="Select" selected disabled>Select</option>
                             <option value="alphabetically">Alphabetically</option> 
@@ -73,7 +68,7 @@
                 </th>
                 <th>Task 
                     <span class="th-head">Hide Icons<input type="checkbox" (click)="checkShowTaskIcon($event)"></span>
-                    <span class="th-head">Filter By
+                    <span class="th-head">Filter
                         <select #sorttask name="sorttask" id="sorttask" class="selector" (change)="filterTaskList(sorttask.value)">
                             <option selected="selected" value="No Change" selected disabled>Select</option>
                             <option value="alphabetically">Alphabetically</option> 
@@ -93,15 +88,22 @@
         </thead>
         <tbody>
             <tr *ngFor="let student of studentList">
+                
                 <td [ngSwitch]="student.displayEditStudent" class="centercontent">
+               
                     <div *ngSwitchCase="0" [ngSwitch]="displayStudentIcons">
-                        {{ student.name }}<br>
+                        <span class="student-name">{{ student.name }}<br></span>
+                        
                         <div *ngSwitchCase="true">
                             <img *ngIf="!student.starChecked "src="/assets/white-star.png" class="icons-small star" (click)="student.switchStar()">
                             <img *ngIf="student.starChecked "src="/assets/yellow-star.png" class="icons-small star" (click)="student.switchStar()">
                             <input type="image" src="/assets/edit.png" (click)="student.editStudentToggle(1)" class="icons" title="Edit Student">
                             <input type="image" src="/assets/delete.png" (click)="deleteStudent(student)" class="icons" title="Delete Student" >
                             <input type="image" src="/assets/add.png" (click)="student.editStudentToggle(2)" class="icons" title="Add Task To Student">
+                            <div class="updown">
+                                <input type="image" src="/assets/upload.png"  class="icons-small" (click)="moveUp(student)">
+                                <input type="image" src="/assets/download.png" class="icons-small" (click)="moveDown(student)"> 
+                            </div>   
                         </div>
                     </div>
                     <div *ngSwitchCase="1">
@@ -146,6 +148,7 @@
                         </ul>
                         
                     </td>
+                  
                      
                     <td *ngIf="student.tasks.length <= 0">Add A Task With <img src="/assets/add.png" class="icons-small"></td>
                     

@@ -7,6 +7,7 @@
 <a href="https://www.flaticon.com/free-icons/month" title="month icons">Month icons created by Flat Icons - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/blank" title="blank icons">Blank icons created by Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/employee" title="employee icons">Employee icons created by Hilmy Abiyyu A. - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/arrows" title="arrows icons">Arrows icons created by Creative Stall Premium - Flaticon</a>
 
 https://codepen.io/joeyhoer/pen/AgbXOj
 https://cdn5.vectorstock.com/i/1000x1000/68/54/cartoon-school-classroom-vector-20556854.jpg

@@ -20,9 +20,16 @@ export class StudentRosterComponent {
     @Input() enteredFirst: string;
     @Input() enteredTask: string;
     @Input() addStudentOn: boolean;
-    @Input()criticalActivitiesOn: boolean;
+    @Input() criticalActivitiesOn: boolean;
     @Input() aboutMeOn: boolean;
     @Input() welcomeMessage: any;
+    @Input() studentList: Student[];
+  
+    @Input() nameExists: boolean;
+    @Input() taskExists: boolean;
+    @Input() displayStudentIcons: boolean;
+    @Input() displayTaskIcons: boolean;
+    @Input() displayTasksAll: boolean;
 
    
 
@@ -46,31 +53,33 @@ export class StudentRosterComponent {
       first_name: new FormControl(""),
       task: new FormControl("")
     })
-
- 
     
-    //Insert testing data//
     todaysDate = format(new Date(), "MMMM/dd/yyyy");
     todaysDateDisplay = format(new Date(), 'EE dd MMMM');
-    taskOne = new Task("Test on sight words.", "None", 0, 0)
-    taskTwo = new Task("Behavior Check-In", "None", 0, 0)
-    taskThree = new Task("RTI Assessment", "None", 0, 0)
-    taskFour = new Task("Reassess Math Test", "None", 0, 0)
-    taskFive = new Task("ClassDojo Mom", "None", 0, 0)
-    taskSix = new Task("Math fluency practice", "None", 0, 0)
-    Michael = new Student("Michael M", [this.taskOne, this.taskTwo], "1", 0)
-    Andrea = new Student("Andrea A", [this.taskThree, this.taskFour], "2", 0)
-    Ash = new Student("Ash K", [this.taskFive, this.taskSix], "3", 0)
-    studentList: Student[] = [this.Michael, this.Andrea, this.Ash]
-    studentsWithCriticalTasks: Student[] = []
-    nameExists = true;
-    taskExists = true;
-    displayStudentIcons = true;
-    displayTaskIcons = true;
-    displayTasksAll = true;
     studentSortDropDown = "Select";
+    studentsWithCriticalTasks: Student[] = []
     
     //Insert testing data
+
+    moveUp(s: Student){
+      for (let i = 1; i < this.studentList.length; i++){
+        if (this.studentList[i].name == s.name){
+          let temp = this.studentList;
+          [temp[i-1], temp[i]] = [temp[i], temp[i-1]];
+          i = this.studentList.length;
+        }
+      }
+    }
+
+    moveDown(s: Student){
+      for (let i = 0; i < this.studentList.length - 1; i++){
+        if (this.studentList[i].name == s.name){
+          let temp = this.studentList;
+          [temp[i], temp[i+1]] = [temp[i+1], temp[i]];
+          i = this.studentList.length - 1;
+        }
+      }
+    }
 
     checkShowFrequencyIcon(event: any){
       this.displayTasksAll = event.target.checked ? false : true;

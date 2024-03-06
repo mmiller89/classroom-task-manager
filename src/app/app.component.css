@@ -3,11 +3,11 @@
 }
 
 .warning-text{
-    background-color:#222E50;
     padding: 50px;
-    color: white;
     border-radius: 10px;
-    
+    box-shadow: 0 0 0 0.25rem rgba(1, 7, 15, 0.25);
+    font-weight: 400;
+    background-color: white;
 }
 
 .ferpa {
