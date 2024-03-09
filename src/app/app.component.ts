@@ -1,10 +1,9 @@
-import { Component, Directive, ViewChild } from '@angular/core';
+import { Component, Directive, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { StudentRosterComponent } from './student-roster/student-roster.component';
 import { Task } from './student-roster/student/task/task.component';
 import { add, addDays, addWeeks, addMonths, addYears, formatDistance, subDays, format, getDate, getDay, isSaturday, isSunday } from 'date-fns'
 import { Student } from './student-roster/student/student.component';
-
 
 @Component({
   selector: 'app-root',
@@ -12,10 +11,14 @@ import { Student } from './student-roster/student/student.component';
   styleUrl: './app.component.css',
 })
 
-export class AppComponent {
+export class AppComponent{
 
 
   @ViewChild(StudentRosterComponent) studentRoster: StudentRosterComponent
+
+ 
+
+
 
 
 
@@ -24,10 +27,15 @@ export class AppComponent {
     password: new FormControl("")
   })
 
+  createAccForm = new FormGroup({
+    createUser: new FormControl(""),
+    
+  })
+
   title = 'Classroom Manager';
   teacherName = "N/A"
 
-  
+  createAccount = false;
   enteredFirst = "";
   enteredTask = "";
   welcomeMessage: any;
@@ -53,11 +61,23 @@ export class AppComponent {
   displayStudentIcons = true;
   displayTaskIcons = true;
   displayTasksAll = true;
+  studentList: Student[] = []
+  
 
   //All of this needs to be loaded from the database on login.
-  studentList: Student[] = []
+ 
  
   //All of this needs to be loaded from the database on login.
+
+
+  createNewAccount(){
+    alert("Created! Welcome " + this.createAccForm.value.createUser!)
+    this.createAccount = false;
+  }
+
+  toggleCreateAccount(num: number){
+    this.createAccount = num == 1 ? true : false;
+  }
 
   toggleCards(input: number){
     if (input == 1){
@@ -78,9 +98,8 @@ export class AppComponent {
   logout(){
     this.loginForm.reset();
     this.beginApplication = false;
-    //Stringify the current array to send to mysql
-    //JSON.stringify(this.studentList);
   }
+
 
   validateLogin(){
     let user = this.loginForm.value.username
@@ -88,18 +107,21 @@ export class AppComponent {
       alert("Login failed. Please provide a username.")
     }
     else if (this.loginForm.value.password == "123"){
-      if (this.studentList.length <= 0){
-        this.studentList = [this.Andrea, this.Michael,this.Ash];
-      }
-      //Parse the array sent from mysql
-      //JSON.parse(this.studentList)
-      this.teacherName = this.loginForm.value.username!;
-      this.welcomeMessage = this.loginForm.value.username;
-      this.beginApplication = true;
-    } 
+          this.teacherName = this.loginForm.value.username!;
+          this.welcomeMessage = "Welcome " + this.teacherName;
+          if (this.studentList.length <= 0){
+            this.studentList = [this.Andrea, this.Michael,this.Ash];
+          }
+          this.beginApplication = true;
+        }
     else {
       alert("Login failed. Password is 123.")
     }
   }
   
 }
+
+
+
+
+

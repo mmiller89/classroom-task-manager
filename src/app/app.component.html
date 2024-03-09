@@ -1,6 +1,7 @@
 
 <div class="grid-container-one">
   <h1>Classroom Task Manager</h1>
+
   
   <div *ngIf="beginApplication">
     <input type="button"  class="right-space button" value="Add a Student" (click)="toggleCards(1)">
@@ -12,19 +13,30 @@
     <input type="button" value="Logout" (click)="logout()" class="logout button">
   </div>
   <div *ngIf="!beginApplication">
-    <form [formGroup] ="loginForm" (ngSubmit)="validateLogin()" class="loginform">
-      <label for="username">Username: </label>
-        <input type="text" id="username" name="username" class="right-space type " formControlName="username">
-      
-        <label for="password">Password: </label>
-        <input type="text" id="password" name="password" class="right-space type " formControlName="password">
-      
-
-      
-        <input type="submit" value="Login" class="right-space login button">
-        <input type="button" class="create_new_account button" value="Create Account">
+    
+      <div *ngIf="createAccount">
+        <form [formGroup] ="createAccForm" (ngSubmit)="createNewAccount()" class="loginform">
+          <label for="createUser">Select Username: </label>
+          <input type="text" id="createUser" name="createUser" class="right-space type " formControlName="createUser">
+          <input type="submit" value="Create User" class="right-space login button">
+          <input type="button" value="Exit" class="right-space login button" (click)="toggleCreateAccount(2)">
+        </form>
+      </div>
+    
+      <div *ngIf="!createAccount">
+        <form [formGroup] ="loginForm" (ngSubmit)="validateLogin()" class="loginform">
+          <label for="username">Username: </label>
+          <input type="text" id="username" name="username" class="right-space type " formControlName="username">
         
-    </form>
+          <label for="password">Password: </label>
+          <input type="text" id="password" name="password" class="right-space type " formControlName="password">
+          <input type="submit" value="Login" class="right-space login button">
+          <input type="button" class="create_new_account button" value="Create Account" (click)="toggleCreateAccount(1)">
+        </form>
+      </div>
+       
+        
+
   </div>
         
          

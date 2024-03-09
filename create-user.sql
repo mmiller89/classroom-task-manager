@@ -1,12 +1,19 @@
-DROP SCHEMA IF EXISTS `classroom-manager`;
+CREATE USER IF NOT exists 'root'@'localhost' IDENTIFIED BY 'root';
+GRANT ALL PRIVILEGES ON * . * TO 'root'@'localhost';
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
 
-CREATE SCHEMA `classroom-manager`;
-USE `classroom-manager`;
+CREATE DATABASE IF NOT EXISTS `classroommanager`;
+USE classroommanager;
 
 
-CREATE TABLE IF NOT EXISTS `classroom-manager`.`user` (
-	id long PRIMARY KEY NOT NULL AUTO_INCREMENT,
+
+CREATE TABLE IF NOT EXISTS user (
+	id BIGINT(20) AUTO_INCREMENT,
     username VARCHAR(255),
-    studentList LONGTEXT
-)
+    studentList LONGTEXT,
+    PRIMARY KEY(`id`)
+);
+
+INSERT INTO user (username, studentList) VALUES ('Tom B. Erichsen', 'Skagen 21');
+SELECT * FROM classroommanager.user;
 

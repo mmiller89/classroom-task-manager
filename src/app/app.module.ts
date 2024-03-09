@@ -6,6 +6,8 @@ import { StudentRosterComponent } from './student-roster/student-roster.componen
 import { NgModel, ReactiveFormsModule } from '@angular/forms';
 import { TaskComponent } from './student-roster/student/task/task.component';
 import { StudentComponent } from './student-roster/student/student.component';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -18,9 +20,10 @@ import { StudentComponent } from './student-roster/student/student.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
-    provideClientHydration()
+    [provideHttpClient(withFetch()), provideClientHydration()],
   ],
   bootstrap: [AppComponent]
 })
