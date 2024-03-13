@@ -18,7 +18,7 @@
         <form [formGroup] ="createAccForm" (ngSubmit)="createNewAccount()" class="loginform">
           <label for="createUser">Select Username: </label>
           <input type="text" id="createUser" name="createUser" class="right-space type " formControlName="createUser">
-          <input type="submit" value="Create User" class="right-space login button">
+          <input type="submit" value="Create User" class="right-space login button" (click)="addUser()">
           <input type="button" value="Exit" class="right-space login button" (click)="toggleCreateAccount(2)">
         </form>
       </div>

@@ -3,8 +3,6 @@ import { FormControl, FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFo
 import { v4 as uuidv4 } from 'uuid';
 import { Student } from './student/student.component';
 import { Task, TaskComponent } from './student/task/task.component';
-import { EventEmitter } from 'stream';
-import { NgModel } from '@angular/forms';
 import { add, addDays, addWeeks, addMonths, nextMonday, nextTuesday, nextWednesday, nextThursday, nextFriday, format, isSaturday, isSunday, toDate, subDays } from 'date-fns'
 
 
