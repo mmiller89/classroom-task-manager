@@ -3,7 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { StudentRosterComponent } from './student-roster/student-roster.component';
 import { Task } from './student-roster/student/task/task.component';
 import { Student } from './student-roster/student/student.component';
-import { UserService } from './services/user.service';
+// import { UserService } from './services/user.service';
 import { User } from './user-data/user';
 
 @Component({
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit{
   users: User[] = [];
   transformedList: Student[] = [];
   transformedTaskList: Task[] = [];
-  constructor (private userService: UserService){}
+  // constructor (private userService: UserService){}
 
   ngOnInit(): void {
     // this.listUsers();
