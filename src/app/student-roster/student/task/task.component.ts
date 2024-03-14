@@ -13,15 +13,14 @@ export class TaskComponent {
 export class Task {
 
   public startDate: string;
-  public nextEvent: string;
-  public nextEventDisplay: string;
   public days_array: any;
   public temp_task_custom = new Set();
   public displayCustomFreq: string;
   public displayShownFrequency: number = 6;
   
 
-  constructor (public taskName: string, public frequency: string, public displayEditTask: number, public displayFrequencyTask: number){
+  constructor (public taskName: string, public frequency: string, public displayEditTask: number, public displayFrequencyTask: number,
+     public nextEvent: string, public nextEventDisplay: string){
   }
 
 
@@ -84,19 +83,19 @@ export class Task {
   
       for (let i of sortedArray){
         if (i == "amon"){
-          stringFreq += "Mon/";
+          stringFreq += "M/";
         }
         else if(i == "btue"){
-          stringFreq += "Tue/";
+          stringFreq += "T/";
         }
         else if(i == "cwed"){
-          stringFreq += "Wed/";
+          stringFreq += "W/";
         }
         else if(i == "dthu"){
-          stringFreq += "Thu/";
+          stringFreq += "T/";
         }
         else if(i == "efri"){
-          stringFreq += "Fri/";
+          stringFreq += "F/";
         }
       }
   

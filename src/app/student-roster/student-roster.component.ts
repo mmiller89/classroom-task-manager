@@ -164,7 +164,7 @@ export class StudentRosterComponent {
 
       if (this.nameExists && this.taskExists) {
         let array_of_tasks: Task[] = []
-        array_of_tasks.push(new Task(this.enteredTask, "None", 0, 0))
+        array_of_tasks.push(new Task(this.enteredTask, "None", 0, 0, "N/A", ""))
         this.insertStudents(this.enteredFirst, array_of_tasks, 0)
       } 
       else if (this.nameExists) {
@@ -199,7 +199,7 @@ export class StudentRosterComponent {
       date = task.nextEvent;
       task.nextEvent = task.weekendAdjust(date);
     } 
-    else if (task.frequency == "Every Other Day"){
+    else if (task.frequency == "Two Days"){
       task.nextEvent = format(new Date(addDays(task.nextEvent, 2)), 'MMMM/dd/yyyy');
       date = task.nextEvent;
       task.nextEvent = task.weekendAdjust(date);
@@ -209,7 +209,7 @@ export class StudentRosterComponent {
       date = task.nextEvent;
       task.nextEvent = task.weekendAdjust(date);
     } 
-    else if (task.frequency == "Every Other Week"){
+    else if (task.frequency == "Two Weeks"){
       task.nextEvent = format(new Date(addWeeks(task.nextEvent, 2)), 'MMMM/dd/yyyy');
       date = task.nextEvent;
       task.nextEvent = task.weekendAdjust(date);
@@ -241,13 +241,11 @@ export class StudentRosterComponent {
       for (let s of this.studentList){
         if (s.tasks.length > 0){
           for (let t of s.tasks){
-            console.log(t.nextEvent)
+          
             if (t.nextEvent != null && t.nextEvent != undefined && t.nextEvent != ""){
-              
-              // console.log(t.nextEvent);
-              // console.log(this.todaysDate);
+             
 
-              if (t.nextEvent < this.todaysDate){
+              if ((toDate(new Date(t.nextEvent)) < toDate(new Date(this.todaysDate)))){
                 this.pushNextEvent(t);
               }
 
@@ -322,7 +320,7 @@ export class StudentRosterComponent {
 
     insertStudents(firstname: string, task_list: Task[], displayEditStudent: number){
       let uuid = uuidv4();
-      this.studentList.unshift(new Student(firstname, task_list, uuid, displayEditStudent));
+      this.studentList.unshift(new Student(firstname, task_list, uuid, displayEditStudent, false));
      
     }
 
@@ -385,7 +383,7 @@ export class StudentRosterComponent {
         student.editStudentToggle(0);
         success = false;
       } else {
-        student.tasks.push(new Task(stringedTask, "None", 0, 0))
+        student.tasks.push(new Task(stringedTask, "None", 0, 0, "N/A", ""))
         student.editStudentToggle(0);
         success = true;
       }

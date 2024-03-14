@@ -5,7 +5,6 @@ import { Task } from './student-roster/student/task/task.component';
 import { Student } from './student-roster/student/student.component';
 import { UserService } from './services/user.service';
 import { User } from './user-data/user';
-import { NONE_TYPE } from '@angular/compiler';
 
 @Component({
   selector: 'app-root',
@@ -31,11 +30,12 @@ export class AppComponent implements OnInit{
     })
   }
 
-  saveUser(){
+  saveUser(value: string){
+    if (value == "save"){
+      alert("Roster saved!")
+    }
     for (let i = 0; i < this.users.length; i++){
       if (this.users[i].username == this.activeUser.username){
-        console.log("Found " + this.users[i].username + " as active user!");
-
         this.users[i].student_list = JSON.stringify(this.studentList);
         console.log(this.users[i].student_list);
         this.userService.putUser(this.users[i]).subscribe();
@@ -78,7 +78,7 @@ export class AppComponent implements OnInit{
   enteredTask = "";
   welcomeMessage: any;
   isEventsCritical = false;
-  beginApplication = false;
+  beginApplication = true;
   georgeEHarrisLogin = 528528;
   addStudentOn = false;
   criticalActivitiesOn = false;
@@ -86,21 +86,21 @@ export class AppComponent implements OnInit{
   Types = {Student};
 
   
-  taskOne = new Task("Test on sight words.", "None", 0, 0)
-  taskTwo = new Task("Behavior Check-In", "None", 0, 0)
-  taskThree = new Task("RTI Assessment", "None", 0, 0)
-  taskFour = new Task("Reassess Math Test", "None", 0, 0)
-  taskFive = new Task("ClassDojo Mom", "None", 0, 0)
-  taskSix = new Task("Math fluency practice", "None", 0, 0)
-  Michael = new Student("Michael M", [this.taskOne, this.taskTwo], "1", 0)
-  Andrea = new Student("Andrea A", [this.taskThree, this.taskFour], "2", 0)
-  Ash = new Student("Ash K", [this.taskFive, this.taskSix], "3", 0)
+  taskOne = new Task("Test on sight words.", "None", 0, 0, "N/A", "")
+  taskTwo = new Task("Behavior Check-In", "None", 0, 0, "N/A", "")
+  taskThree = new Task("RTI Assessment", "None", 0, 0, "N/A", "")
+  taskFour = new Task("Reassess Math Test", "None", 0, 0, "N/A", "")
+  taskFive = new Task("ClassDojo Mom", "None", 0, 0, "N/A", "")
+  taskSix = new Task("Math fluency practice", "None", 0, 0, "N/A", "")
+  Michael = new Student("Michael M", [this.taskOne, this.taskTwo], "1", 0, false)
+  Andrea = new Student("Andrea A", [this.taskThree, this.taskFour], "2", 0, false)
+  Ash = new Student("Ash K", [this.taskFive, this.taskSix], "3", 0, false)
   nameExists = true;
   taskExists = true;
   displayStudentIcons = true;
   displayTaskIcons = true;
   displayTasksAll = true;
-  studentList: Student[] = []
+  studentList: Student[] = [this.Michael, this.Andrea, this.Ash]
   
   activeUser: User;
   dummyUser = new User(99999, "Foo", "[]");
@@ -119,15 +119,28 @@ export class AppComponent implements OnInit{
   toggleCards(input: number){
     if (input == 1){
       this.addStudentOn = this.addStudentOn == true ? false : true;
+      if (this.addStudentOn){
+        this.criticalActivitiesOn = false;
+        this.aboutMeOn = false;
+      }
     }
     else if (input == 2){
       if (this.criticalActivitiesOn == false){
         this.studentRoster.verifyCriticalUpdates();
       }
       this.criticalActivitiesOn = this.criticalActivitiesOn == true ? false : true;
+      if (this.criticalActivitiesOn){
+        this.addStudentOn = false;
+        this.aboutMeOn = false;
+      }
     }
     else if (input == 3){
       this.aboutMeOn = this.aboutMeOn == true ? false : true;
+      if (this.aboutMeOn){
+        this.addStudentOn = false;
+        this.criticalActivitiesOn = false;
+      }
+      
     }
    
   }
@@ -135,7 +148,7 @@ export class AppComponent implements OnInit{
   logout(){
     this.loginForm.reset();
     this.beginApplication = false;
-    this.saveUser();
+    this.saveUser("logout");
     this.transformedList = [];
     this.transformedTaskList = [];
     this.activeUser = this.dummyUser;
@@ -174,13 +187,13 @@ export class AppComponent implements OnInit{
               if (stu.tasks.length > 0){
                 for (let a = 0; a < stu.tasks.length; a++){
                   let task = stu.tasks[a];
-                  this.transformedTaskList.push(new Task(task.taskName, task.frequency, task.displayEditTask, task.displayFrequencyTask))
+                  this.transformedTaskList.push(new Task(task.taskName, task.frequency, task.displayEditTask, task.displayFrequencyTask, task.nextEvent, task.nextEventDisplay))
                 }
                 stu.tasks = [...this.transformedTaskList];
-                this.transformedList.push(new Student(stu.name, stu.tasks, stu.id, stu.displayEditStudent));
+                this.transformedList.push(new Student(stu.name, stu.tasks, stu.id, stu.displayEditStudent, stu.starChecked));
                 this.transformedTaskList = [];
               } else {
-                this.transformedList.push(new Student(stu.name, [], stu.id, stu.displayEditStudent));
+                this.transformedList.push(new Student(stu.name, [], stu.id, stu.displayEditStudent, stu.starChecked));
               }
                 
               

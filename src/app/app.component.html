@@ -1,12 +1,13 @@
 
 <div class="grid-container-one">
-  <h1>Classroom Task Manager</h1>
+  <h2>Classroom Task Manager</h2>
 
   
   <div *ngIf="beginApplication">
     <input type="button"  class="right-space button" value="Add a Student" (click)="toggleCards(1)">
-    <input type="button"  class="right-space button" value="Critical Activites" (click)="toggleCards(2)">
+    <input type="button"  class="right-space button" value="Critical Tasks" (click)="toggleCards(2)">
     <input type="button" class="right-space button" value="About the Author" (click)="toggleCards(3)">
+    <input type="button" class="right-space button" value="Save Work" (click)="saveUser('save')">
   </div>  
   <div *ngIf="beginApplication" class="status">
     <img src="/assets/id-card.png" class="profile-icon"> <span class="right-space">Welcome {{teacherName}}</span> 
@@ -56,7 +57,7 @@
 
 <div *ngIf="!beginApplication" class="form-display warning-text"> 
   
-  <p>Please login to begin. For mock app the username is anything you want, and password is 123. You do not need to create an account.</p>
+  <p>Using the Create Account button, select a username. The password will always be 123.</p>
   <p>This app is intended for classroom teachers who want to better manage their classroom students and the tasks associated with them.</p>
   <p>Please note, due to FERPA (Family Education Rights and Privacy Act) it is crucial that you<strong> do not enter in any real student information.</strong>
     <br>You may use first names or aliases if two students with the same name exist in your class. Read more about FERPA at <a href="https://www2.ed.gov/policy/gen/guid/fpco/ferpa/index.html" class="ferpa" target="_blank">this link</a>.</p>

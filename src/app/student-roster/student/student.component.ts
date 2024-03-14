@@ -26,11 +26,11 @@ export class StudentComponent  {
 
 export class Student{
 
-      constructor(public name: string, public tasks: Task[], public id: string, public displayEditStudent: number) {}
+      constructor(public name: string, public tasks: Task[], public id: string, public displayEditStudent: number, public starChecked: boolean) {}
 
 
       criticalTasks = new Set<string>;
-      starChecked = false;
+      
 
      
       switchStar(){
