@@ -28,6 +28,8 @@ export class StudentRosterComponent {
     @Input() displayStudentIcons: boolean;
     @Input() displayTaskIcons: boolean;
     @Input() displayTasksAll: boolean;
+    @Input() todaysDate: string;
+    @Input() todaysDateDisplay: string;
 
    
 
@@ -52,8 +54,7 @@ export class StudentRosterComponent {
       task: new FormControl("")
     })
     
-    todaysDate = format(new Date(), "MMMM/dd/yyyy");
-    todaysDateDisplay = format(new Date(), 'EE dd MMMM');
+    
     studentSortDropDown = "Select";
     studentsWithCriticalTasks: Student[] = []
     

@@ -88,7 +88,7 @@ export class Task {
           stringFreq += "W/";
         }
         else if(i == "dthu"){
-          stringFreq += "T/";
+          stringFreq += "TH/";
         }
         else if(i == "efri"){
           stringFreq += "F/";

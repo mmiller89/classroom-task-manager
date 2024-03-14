@@ -5,6 +5,7 @@ import { Task } from './student-roster/student/task/task.component';
 import { Student } from './student-roster/student/student.component';
 import { UserService } from './services/user.service';
 import { User } from './user-data/user';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-root',
@@ -84,6 +85,9 @@ export class AppComponent implements OnInit{
   criticalActivitiesOn = false;
   aboutMeOn = false;
   Types = {Student};
+
+  todaysDate = format(new Date(), "MMMM/dd/yyyy");
+  todaysDateDisplay = format(new Date(), 'EE dd MMMM');
 
   
   taskOne = new Task("Test on sight words.", "None", 0, 0, "N/A", "")
@@ -211,10 +215,6 @@ export class AppComponent implements OnInit{
             
           console.log(this.studentList); //data is not good.
           this.beginApplication = true;
-
-          //NONE OF THE FUNCTIONS/BUTTONS WORK WHEN I SAVE AND PARSE THE JSON LIST. DONE FOR TODAY.
-          //CORRECTION - SORT AND ARROW MOVE FUNCTIONS WORK. NONE OF THE BUTTONS DO.
-          //https://stackoverflow.com/questions/34031448/typescript-typeerror-myclass-myfunction-is-not-a-function
         }
       }
     }
