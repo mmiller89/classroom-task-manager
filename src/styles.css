@@ -14,7 +14,7 @@ body {
     min-width: 768px;
     max-width: 1800px;
     margin: 0 auto;
-    background-image: url('./assets/test-safeimagekit.jpeg');
+    background-image: url('https://raw.githubusercontent.com/mmiller89/classroom-task-manager/main/src/assets/test-safeimagekit.jpeg');
     /* https://github.com/mmiller89/classroom-task-manager/blob/main/src/assets/test-safeimagekit.jpeg */
     background-repeat: no-repeat;
     background-size:cover;
