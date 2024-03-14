@@ -10,7 +10,7 @@
     <input type="button" class="right-space button" value="Save Work" (click)="saveUser('save')">
   </div>  
   <div *ngIf="beginApplication" class="status">
-    <img src="/assets/id-card.png" class="profile-icon"> <span class="right-space">Welcome {{teacherName}}</span> 
+    <img src="./assets/id-card.png" class="profile-icon"> <span class="right-space">Welcome {{teacherName}}</span> 
     <input type="button" value="Logout" (click)="logout()" class="logout button">
   </div>
   <div *ngIf="!beginApplication">

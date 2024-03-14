@@ -42,7 +42,7 @@
     <div><button (click)="dayMinusOne()" class="button">Day -1</button><button (click)="dayPlusOne()" class="button">Day +1</button></div>
     </div> 
     <div class="form-display aboutme" *ngIf="aboutMeOn">
-        <img src="/assets/profile.jpg">
+        <img src="./assets/profile.jpg">
       <h3>Michael Miller</h3>
       <p>Entry level Software Engineer looking for internships and junior level work.</p>
         <a href="https://www.linkedin.com/in/michaelpmiller89/" target="_blank">LinkedIn</a>
@@ -83,7 +83,7 @@
                 </th>
                 <th>Task Manager<br>
                     <span class="th-head">Hide Frequency<input type="checkbox" (click)="checkShowFrequencyIcon($event)" class="check-box">
-                        <input type="image" src="/assets/frequency.png" class="icons-small" title="Check Frequency">
+                        <input type="image" src="./assets/frequency.png" class="icons-small" title="Check Frequency">
                     </span>
                 </th>
             </tr>
@@ -97,14 +97,14 @@
                         <span class="student-name">{{ student.name }}<br></span>
                         
                         <div *ngSwitchCase="true">
-                            <img *ngIf="!student.starChecked "src="/assets/white-star.png" class="icons star" (click)="student.switchStar()">
-                            <img *ngIf="student.starChecked "src="/assets/yellow-star.png" class="icons star" (click)="student.switchStar()">
-                            <input type="image" src="/assets/edit.png" (click)="student.editStudentToggle(1)" class="icons" title="Edit Student">
-                            <input type="image" src="/assets/delete.png" (click)="deleteStudent(student)" class="icons" title="Delete Student" >
-                            <input type="image" src="/assets/add.png" (click)="student.editStudentToggle(2)" class="icons" title="Add Task To Student">
+                            <img *ngIf="!student.starChecked "src="./assets/white-star.png" class="icons star" (click)="student.switchStar()">
+                            <img *ngIf="student.starChecked "src="./assets/yellow-star.png" class="icons star" (click)="student.switchStar()">
+                            <input type="image" src="./assets/edit.png" (click)="student.editStudentToggle(1)" class="icons" title="Edit Student">
+                            <input type="image" src="./assets/delete.png" (click)="deleteStudent(student)" class="icons" title="Delete Student" >
+                            <input type="image" src="./assets/add.png" (click)="student.editStudentToggle(2)" class="icons" title="Add Task To Student">
                             <div class="updown">
-                                <input type="image" src="/assets/upload.png"  class="icons-small" (click)="moveUp(student)">
-                                <input type="image" src="/assets/download.png" class="icons-small" (click)="moveDown(student)"> 
+                                <input type="image" src="./assets/upload.png"  class="icons-small" (click)="moveUp(student)">
+                                <input type="image" src="./assets/download.png" class="icons-small" (click)="moveDown(student)"> 
                             </div>   
                         </div>
                     </div>
@@ -112,16 +112,16 @@
                         <form [formGroup] ="edit_student_name" (ngSubmit)="sendEditedStudentName(student)">
                             <input type="text" id="edit_student_name" name="edit_student_name" placeholder="{{student.name}}" formControlName="studentValueEntered" class="type">
                             <br>
-                            <input type="image" src="/assets/check.png" class="icons" title="Change Name">
-                            <input type="image" src="/assets/cancel.png" (click)="goBackStudentName(student)" class="icons" title="Cancel Edit">
+                            <input type="image" src="./assets/check.png" class="icons" title="Change Name">
+                            <input type="image" src="./assets/cancel.png" (click)="goBackStudentName(student)" class="icons" title="Cancel Edit">
                         </form> 
                     </div>
                     <div *ngSwitchCase="2">{{ student.name }} 
                         <form [formGroup] ="add_task" (ngSubmit)="sendAddTask(student)">
                             <textarea rows="3" columns = "50" class="addTask" id="add_task" name="add_task"  placeholder="What's the task?" formControlName="taskValueEntered"></textarea>
                             <br>
-                            <input type="image" src="/assets/check.png" class="icons" title="Add Task">
-                            <input type="image" src="/assets/cancel.png" (click)="student.editStudentToggle(0)" class="icons" title="Cancel Edit">
+                            <input type="image" src="./assets/check.png" class="icons" title="Add Task">
+                            <input type="image" src="./assets/cancel.png" (click)="student.editStudentToggle(0)" class="icons" title="Cancel Edit">
                         </form>
                     </div>
                 </td>
@@ -132,9 +132,9 @@
                         
                         <li *ngSwitchCase="0" [ngSwitch]="displayTaskIcons">{{ task.taskName }}<br>
                             <div *ngSwitchCase="true">
-                                <input type="image" src="/assets/edit.png" (click)="task.editTaskToggle(1)" class="icons" title="Edit Task">
-                                <input type="image" src="/assets/delete.png" (click)="student.deleteTask(task)" class="icons" title="Delete Task">
-                                <input type="image" src="/assets/taskadd.png" (click)="task.editFrequencyToggle(1)" class="icons" title="Setup Task Manager">
+                                <input type="image" src="./assets/edit.png" (click)="task.editTaskToggle(1)" class="icons" title="Edit Task">
+                                <input type="image" src="./assets/delete.png" (click)="student.deleteTask(task)" class="icons" title="Delete Task">
+                                <input type="image" src="./assets/taskadd.png" (click)="task.editFrequencyToggle(1)" class="icons" title="Setup Task Manager">
                             </div>
                         </li>
                         
@@ -142,8 +142,8 @@
                             <form [formGroup] ="edit_task_name" (ngSubmit)="sendEditedTask(student, task)">
                                 <input type="text" id="edit_task" name="edit_task" placeholder="{{task.taskName}}" class="type" formControlName="valueEntered">
                                 <br>
-                                <input type="image" src="/assets/check.png" class="icons" title="Edit Task">
-                                <input type="image" src="/assets/cancel.png" (click)="goBack(task)" class="icons" title="Cancel Edit">
+                                <input type="image" src="./assets/check.png" class="icons" title="Edit Task">
+                                <input type="image" src="./assets/cancel.png" (click)="goBack(task)" class="icons" title="Cancel Edit">
                             </form> 
                                 
                             </li>
@@ -152,13 +152,13 @@
                     </td>
                   
                      
-                    <td *ngIf="student.tasks.length <= 0">Add A Task With <img src="/assets/add.png" class="icons-small"></td>
+                    <td *ngIf="student.tasks.length <= 0">Add A Task With <img src="./assets/add.png" class="icons-small"></td>
                     
                     <td *ngIf="student.tasks.length > 0">
                        
                         <ul class="nodot" id="space-between-tasks" *ngFor="let task of student.tasks" [ngSwitch]="task.displayFrequencyTask">
                             <div class="task-align">
-                                <li *ngSwitchCase="0">Setup Task<img src="/assets/taskadd.png" class="icons-small"></li>
+                                <li *ngSwitchCase="0">Setup Task<img src="./assets/taskadd.png" class="icons-small"></li>
                             </div>
                             <li *ngSwitchCase="1"> 
                                     <strong>Frequency of Task </strong><br> 
@@ -179,8 +179,8 @@
                                 <strong>Select Start Date</strong>
                                 <form [formGroup] ="select_date" (ngSubmit)="logDate(task, false)">
                                     <input type="date" id="task_date" name="task_date" class="selector" formControlName="dateSelected">
-                                    <input type="image" src="/assets/check.png" class="login submit icons-small" value="Submit" title="Submit Date">
-                                    <input type="image" src="/assets/cancel.png" (click)="task.editFrequencyToggle(1)" class="icons-small" title="Cancel">
+                                    <input type="image" src="./assets/check.png" class="login submit icons-small" value="Submit" title="Submit Date">
+                                    <input type="image" src="./assets/cancel.png" (click)="task.editFrequencyToggle(1)" class="icons-small" title="Cancel">
                                 </form> 
                             </li>
                             
@@ -190,7 +190,7 @@
                             
                                 <span [ngSwitch]="task.displayShownFrequency">
                                     <span *ngSwitchCase="6">
-                                        <span *ngIf="displayTasksAll" class="push-right"><img src="/assets/frequency.png" class="icons-smallest">{{task.frequency}}</span>
+                                        <span *ngIf="displayTasksAll" class="push-right"><img src="./assets/frequency.png" class="icons-smallest">{{task.frequency}}</span>
                                         
                                     </span>
                                 </span>
@@ -203,7 +203,7 @@
                                 
                                 <span [ngSwitch]="task.displayShownFrequency">
                                     <span *ngSwitchCase="6">
-                                        <span *ngIf="displayTasksAll" class="push-right"><img src="/assets/frequency.png" class="icons-smallest">{{task.frequency}}</span>
+                                        <span *ngIf="displayTasksAll" class="push-right"><img src="./assets/frequency.png" class="icons-smallest">{{task.frequency}}</span>
                                     </span>
                                 </span>
                                 
@@ -212,8 +212,8 @@
                             
                             <li *ngSwitchCase="5">
                                 Schedule - Check Days 
-                                <input type="image" src="/assets/check.png" (click)="logDate(task, true)" class="submit icons-small">
-                                <input type="image" src="/assets/cancel.png" (click)="task.editFrequencyToggle(3)" class="icons-small" title="Cancel"><br><br>
+                                <input type="image" src="./assets/check.png" (click)="logDate(task, true)" class="submit icons-small">
+                                <input type="image" src="./assets/cancel.png" (click)="task.editFrequencyToggle(3)" class="icons-small" title="Cancel"><br><br>
 
                                 <label class="container">
                                 Mon 
