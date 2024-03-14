@@ -100,7 +100,7 @@
                             <img *ngIf="!student.starChecked "src="./assets/white-star.png" class="icons star" (click)="student.switchStar()">
                             <img *ngIf="student.starChecked "src="./assets/yellow-star.png" class="icons star" (click)="student.switchStar()">
                             <input type="image" src="./assets/edit.png" (click)="student.editStudentToggle(1)" class="icons" title="Edit Student">
-                            <input type="image" src="./assets/delete.png" (click)="deleteStudent(student)" class="icons" title="Delete Student" >
+                            <input type="image" src="https://raw.githubusercontent.com/mmiller89/classroom-task-manager/main/src/assets/delete.png" (click)="deleteStudent(student)" class="icons" title="Delete Student" >
                             <input type="image" src="./assets/add.png" (click)="student.editStudentToggle(2)" class="icons" title="Add Task To Student">
                             <div class="updown">
                                 <input type="image" src="./assets/upload.png"  class="icons-small" (click)="moveUp(student)">
