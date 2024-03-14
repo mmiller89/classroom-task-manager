@@ -72,10 +72,6 @@ export class Task {
       let stringFreq: string = ""
       let sortedArray = [...this.temp_task_custom].sort();
       this.days_array = [...sortedArray]
-
-      // console.log(this.temp_task_custom)
-      // console.log(this.days_array)
-      
       
       //We have a sorted list (in order) of the days checked. We need to check what day it is, and set nextDate to the nearest checked date.
       //This function will put into task component and can be called on refreshing the app.

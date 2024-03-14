@@ -2,6 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
 
+Demonstration of the application at: https://drive.google.com/file/d/1BsQOETayMb7yl7gD-dLE-XMiRBSp38dy/view
+
 ----------
 AUTHOR
 
@@ -26,13 +28,14 @@ TECHNOLOGY
 Being developed with Angular/HTML/CSS/Typescript and Java/Spring at the backend.
 
 ----------
-PROGRESS (3/5/24)
+PROGRESS 
 
+(3/5/24)
 The front end is functional, but lacking responsiveness (see next section). I will be working on creating the back end in the coming week.
 
-----------
-STRUGGLES (3/5/24)
+(3/14/24)
+Application is fully functional on my local computer. I will be looking to host and configure it to a website soon.
 
-On the front end, I am currently working to resolve responsiveness (or lack thereof). My solution will be to offer a mobile specific version which will look much different to the desktop version, and add some responsive adjustments to the desktop version up to a certain screen size.
+----------
 
 
