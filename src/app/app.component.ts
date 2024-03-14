@@ -78,7 +78,7 @@ export class AppComponent implements OnInit{
   enteredTask = "";
   welcomeMessage: any;
   isEventsCritical = false;
-  beginApplication = true;
+  beginApplication = false;
   georgeEHarrisLogin = 528528;
   addStudentOn = false;
   criticalActivitiesOn = false;
@@ -100,7 +100,7 @@ export class AppComponent implements OnInit{
   displayStudentIcons = true;
   displayTaskIcons = true;
   displayTasksAll = true;
-  studentList: Student[] = [this.Michael, this.Andrea, this.Ash]
+  studentList: Student[] = []
   
   activeUser: User;
   dummyUser = new User(99999, "Foo", "[]");
