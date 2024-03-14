@@ -20,35 +20,35 @@ export class AppComponent implements OnInit{
   constructor (private userService: UserService){}
 
   ngOnInit(): void {
-    this.listUsers();
+    // this.listUsers();
   }
 
   listUsers(){
-    this.userService.getUserList().subscribe(data => {
-      this.users = data;
-      console.log(data)
-    })
+    // this.userService.getUserList().subscribe(data => {
+    //   this.users = data;
+    //   console.log(data)
+    // })
   }
 
   saveUser(value: string){
-    if (value == "save"){
-      alert("Roster saved!")
-    }
-    for (let i = 0; i < this.users.length; i++){
-      if (this.users[i].username == this.activeUser.username){
-        this.users[i].student_list = JSON.stringify(this.studentList);
-        console.log(this.users[i].student_list);
-        this.userService.putUser(this.users[i]).subscribe();
-      }
-    }
+    // if (value == "save"){
+    //   alert("Roster saved!")
+    // }
+    // for (let i = 0; i < this.users.length; i++){
+    //   if (this.users[i].username == this.activeUser.username){
+    //     this.users[i].student_list = JSON.stringify(this.studentList);
+    //     console.log(this.users[i].student_list);
+    //     this.userService.putUser(this.users[i]).subscribe();
+    //   }
+    // }
 
     
   }
 
   addUser(){
-    let newUser = new User(0, this.createAccForm.value.createUser!, "[]");
-    this.userService.addUser(newUser)
-    .subscribe(user => this.users.push(user));
+    // let newUser = new User(0, this.createAccForm.value.createUser!, "[]");
+    // this.userService.addUser(newUser)
+    // .subscribe(user => this.users.push(user));
   }
 
 
@@ -78,7 +78,7 @@ export class AppComponent implements OnInit{
   enteredTask = "";
   welcomeMessage: any;
   isEventsCritical = false;
-  beginApplication = true;
+  beginApplication = false;
   georgeEHarrisLogin = 528528;
   addStudentOn = false;
   criticalActivitiesOn = false;
@@ -165,43 +165,38 @@ export class AppComponent implements OnInit{
       alert("Login failed. Password is 123.")
     } 
     else {
-      for (let i = 0; i < this.users.length; i++){
-        if (this.users.length > 0 && this.users[i].username == userTyped){
-          this.activeUser = this.users[i];
+      // for (let i = 0; i < this.users.length; i++){
+        // this.users.length > 0 && final value = this.users[i].username
+        if ("Test" == userTyped){
+          // this.activeUser = this.users[i];
           
           
            
-        
 
-          console.log(this.studentList); // at this stage, data is good.
             
       
 
           this.teacherName = this.loginForm.value.username!;
           this.welcomeMessage = "Welcome " + this.teacherName;
-          this.studentList = JSON.parse(this.users[i].student_list);
+          // this.studentList = JSON.parse(this.users[i].student_list);
        
           if (this.studentList.length > 0){
             for (let i = 0; i < this.studentList.length; i++){
-              let stu = this.studentList[i];
-              if (stu.tasks.length > 0){
-                for (let a = 0; a < stu.tasks.length; a++){
-                  let task = stu.tasks[a];
-                  this.transformedTaskList.push(new Task(task.taskName, task.frequency, task.displayEditTask, task.displayFrequencyTask, task.nextEvent, task.nextEventDisplay))
-                }
-                stu.tasks = [...this.transformedTaskList];
-                this.transformedList.push(new Student(stu.name, stu.tasks, stu.id, stu.displayEditStudent, stu.starChecked));
-                this.transformedTaskList = [];
-              } else {
-                this.transformedList.push(new Student(stu.name, [], stu.id, stu.displayEditStudent, stu.starChecked));
-              }
-                
-              
-              
-              
+              // let stu = this.studentList[i];
+              // if (stu.tasks.length > 0){
+              //   for (let a = 0; a < stu.tasks.length; a++){
+              //     let task = stu.tasks[a];
+              //     this.transformedTaskList.push(new Task(task.taskName, task.frequency, task.displayEditTask, task.displayFrequencyTask, task.nextEvent, task.nextEventDisplay))
+              //   }
+              //   stu.tasks = [...this.transformedTaskList];
+              //   this.transformedList.push(new Student(stu.name, stu.tasks, stu.id, stu.displayEditStudent, stu.starChecked));
+              //   this.transformedTaskList = [];
+              // } else {
+              //   this.transformedList.push(new Student(stu.name, [], stu.id, stu.displayEditStudent, stu.starChecked));
+              // }
             }
             
-            this.studentList = [...this.transformedList];
+            // this.studentList = [...this.transformedList];
           }
           else {
             this.studentList.push(this.Andrea);
@@ -209,13 +204,11 @@ export class AppComponent implements OnInit{
             this.studentList.push(this.Ash);
           }
             
-          console.log(this.studentList); //data is not good.
+    
           this.beginApplication = true;
 
-          //NONE OF THE FUNCTIONS/BUTTONS WORK WHEN I SAVE AND PARSE THE JSON LIST. DONE FOR TODAY.
-          //CORRECTION - SORT AND ARROW MOVE FUNCTIONS WORK. NONE OF THE BUTTONS DO.
-          //https://stackoverflow.com/questions/34031448/typescript-typeerror-myclass-myfunction-is-not-a-function
-        }
+    
+        // }
       }
     }
 
