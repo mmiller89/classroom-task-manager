@@ -14,7 +14,7 @@ body {
     min-width: 768px;
     max-width: 1800px;
     margin: 0 auto;
-    background-image: url('~assets/test-safeimagekit.jpeg');
+    background-image: url('../assets/test-safeimagekit.jpeg');
     background-repeat: no-repeat;
     background-size:cover;
 }
