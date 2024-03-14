@@ -100,11 +100,11 @@
                             <img *ngIf="!student.starChecked "src="./assets/white-star.png" class="icons star" (click)="student.switchStar()">
                             <img *ngIf="student.starChecked "src="./assets/yellow-star.png" class="icons star" (click)="student.switchStar()">
                             <input type="image" src="./assets/edit.png" (click)="student.editStudentToggle(1)" class="icons" title="Edit Student">
-                            <input type="image" src="assets/delete.png" (click)="deleteStudent(student)" class="icons" title="Delete Student" >
-                            <input type="image" src="C:\Users\mchlm\OneDrive\Desktop\Portfolio Proj\class-task-manager\src\assets\add.png" (click)="student.editStudentToggle(2)" class="icons" title="Add Task To Student">
+                            <input type="image" src="./assets/delete.png" (click)="deleteStudent(student)" class="icons" title="Delete Student" >
+                            <input type="image" src="./assets/add.png" (click)="student.editStudentToggle(2)" class="icons" title="Add Task To Student">
                             <div class="updown">
-                                <input type="image" src="/assets/upload.png"  class="icons-small" (click)="moveUp(student)">
-                                <input type="image" src="/src/assets/download.png" class="icons-small" (click)="moveDown(student)"> 
+                                <input type="image" src="./assets/upload.png"  class="icons-small" (click)="moveUp(student)">
+                                <input type="image" src="./assets/download.png" class="icons-small" (click)="moveDown(student)"> 
                             </div>   
                         </div>
                     </div>
@@ -203,7 +203,7 @@
                                 
                                 <span [ngSwitch]="task.displayShownFrequency">
                                     <span *ngSwitchCase="6">
-                                        <span *ngIf="displayTasksAll" class="push-right"><img src="./assets/frequency.png" class="icons-smallest">{{task.frequency}}</span>
+                                        <span *ngIf="displayTasksAll" class="push-right"><img src="/assets/frequency.png" class="icons-smallest">{{task.frequency}}</span>
                                     </span>
                                 </span>
                                 
@@ -212,8 +212,8 @@
                             
                             <li *ngSwitchCase="5">
                                 Schedule - Check Days 
-                                <input type="image" src="./assets/check.png" (click)="logDate(task, true)" class="submit icons-small">
-                                <input type="image" src="./assets/cancel.png" (click)="task.editFrequencyToggle(3)" class="icons-small" title="Cancel"><br><br>
+                                <input type="image" src="/assets/check.png" (click)="logDate(task, true)" class="submit icons-small">
+                                <input type="image" src="/assets/cancel.png" (click)="task.editFrequencyToggle(3)" class="icons-small" title="Cancel"><br><br>
 
                                 <label class="container">
                                 Mon 
