@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild} from '@angular/core';
+import { Component, Input, OnInit, ViewChild} from '@angular/core';
 import { FormControl, FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { Student } from './student/student.component';
@@ -12,24 +12,31 @@ import { add, addDays, addWeeks, addMonths, nextMonday, nextTuesday, nextWednesd
   templateUrl: './student-roster.component.html',
   styleUrl: './student-roster.component.css'
 })
-export class StudentRosterComponent {
+export class StudentRosterComponent implements OnInit {
     
 
-    @Input() enteredFirst: string;
-    @Input() enteredTask: string;
-    @Input() addStudentOn: boolean;
-    @Input() criticalActivitiesOn: boolean;
-    @Input() aboutMeOn: boolean;
-    @Input() welcomeMessage: any;
-    @Input() studentList: Student[];
+  ngOnInit(): void {
+    this.studentSortDropDown = "Select";
+    this.studentsWithCriticalTasks = [];
+    
+  }
   
-    @Input() nameExists: boolean;
-    @Input() taskExists: boolean;
-    @Input() displayStudentIcons: boolean;
-    @Input() displayTaskIcons: boolean;
-    @Input() displayTasksAll: boolean;
-    @Input() todaysDate: string;
-    @Input() todaysDateDisplay: string;
+  @Input() enteredFirst: string;
+  @Input() enteredTask: string;
+  @Input() addStudentOn: boolean;
+  @Input() criticalActivitiesOn: boolean;
+  @Input() aboutMeOn: boolean;
+  @Input() welcomeMessage: any;
+  @Input() studentList: Student[];
+
+  @Input() nameExists: boolean;
+  @Input() taskExists: boolean;
+  @Input() displayStudentIcons: boolean;
+  @Input() displayTaskIcons: boolean;
+  @Input() displayTasksAll: boolean;
+  @Input() todaysDate: string;
+  @Input() todaysDateDisplay: string;
+    
 
    
 
@@ -55,8 +62,8 @@ export class StudentRosterComponent {
     })
     
     
-    studentSortDropDown = "Select";
-    studentsWithCriticalTasks: Student[] = []
+    studentSortDropDown: any;
+    studentsWithCriticalTasks: any;
     
     //Insert testing data
 
