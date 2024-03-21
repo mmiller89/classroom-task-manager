@@ -1,55 +1,55 @@
 {
-  "hash": "739922e2",
+  "hash": "f02b4b4e",
   "configHash": "899a9d3e",
-  "lockfileHash": "a30bfa82",
-  "browserHash": "3660cec6",
+  "lockfileHash": "8006cdf8",
+  "browserHash": "9ab75a7d",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "8651d27b",
+      "fileHash": "0f2bf2eb",
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "6bef3994",
+      "fileHash": "8c8214ad",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "b7dd8888",
+      "fileHash": "a67c6fac",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "01b6ffde",
+      "fileHash": "c7918fb8",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "308f5762",
+      "fileHash": "351f959e",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "ad6cbfed",
+      "fileHash": "7fd17be8",
       "needsInterop": false
     },
     "date-fns": {
       "src": "../../../../../node_modules/date-fns/index.mjs",
       "file": "date-fns.js",
-      "fileHash": "e38f003e",
+      "fileHash": "321c4997",
       "needsInterop": false
     },
     "uuid": {
       "src": "../../../../../node_modules/uuid/dist/esm-browser/index.js",
       "file": "uuid.js",
-      "fileHash": "85978eb0",
+      "fileHash": "97cd74a2",
       "needsInterop": false
     }
   },

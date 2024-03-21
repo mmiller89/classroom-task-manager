@@ -22,6 +22,41 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     // this.listUsers();
+    this.title = 'Classroom Manager';
+    this.teacherName = "N/A"
+    this.createAccount = false;
+    this.enteredFirst = "";
+    this.enteredTask = "";
+    this.isEventsCritical = false;
+    this.beginApplication = false;
+    this.georgeEHarrisLogin = 528528;
+    this.addStudentOn = false;
+    this.criticalActivitiesOn = false;
+    this.aboutMeOn = false;
+    this.Types = {Student};
+
+    this.todaysDate = format(new Date(), "MMMM/dd/yyyy");
+    this.todaysDateDisplay = format(new Date(), 'EE dd MMMM');
+
+    
+    this.taskOne = new Task("Test on sight words.", "None", 0, 0, "N/A", "")
+    this.taskTwo = new Task("Behavior Check-In", "None", 0, 0, "N/A", "")
+    this.taskThree = new Task("RTI Assessment", "None", 0, 0, "N/A", "")
+    this.taskFour = new Task("Reassess Math Test", "None", 0, 0, "N/A", "")
+    this.taskFive = new Task("ClassDojo Mom", "None", 0, 0, "N/A", "")
+    this.taskSix = new Task("Math fluency practice", "None", 0, 0, "N/A", "")
+    this.Michael = new Student("Michael M", [this.taskOne, this.taskTwo], "1", 0, false)
+    this.Andrea = new Student("Andrea A", [this.taskThree, this.taskFour], "2", 0, false)
+    this.Ash = new Student("Ash K", [this.taskFive, this.taskSix], "3", 0, false)
+    this.nameExists = true;
+    this.taskExists = true;
+    this.displayStudentIcons = true;
+    this.displayTaskIcons = true;
+    this.displayTasksAll = true;
+    this.studentList = [];
+    
+    this.activeUser = User;
+    this.dummyUser = new User(99999, "Foo", "[]");
   }
 
   listUsers(){
@@ -71,43 +106,43 @@ export class AppComponent implements OnInit{
     
   })
 
-  title = 'Classroom Manager';
-  teacherName = "N/A"
+  title: string;
+  teacherName: string;
 
-  createAccount = false;
-  enteredFirst = "";
-  enteredTask = "";
+  createAccount: any;
+  enteredFirst: any;
+  enteredTask: any;
   welcomeMessage: any;
-  isEventsCritical = false;
-  beginApplication = false;
-  georgeEHarrisLogin = 528528;
-  addStudentOn = false;
-  criticalActivitiesOn = false;
-  aboutMeOn = false;
-  Types = {Student};
+  isEventsCritical: any;
+  beginApplication: any;
+  georgeEHarrisLogin: any;
+  addStudentOn: any;
+  criticalActivitiesOn: any;
+  aboutMeOn: any;
+  Types: any;
 
-  todaysDate = format(new Date(), "MMMM/dd/yyyy");
-  todaysDateDisplay = format(new Date(), 'EE dd MMMM');
+  todaysDate: any;
+  todaysDateDisplay: any;
 
   
-  taskOne = new Task("Test on sight words.", "None", 0, 0, "N/A", "")
-  taskTwo = new Task("Behavior Check-In", "None", 0, 0, "N/A", "")
-  taskThree = new Task("RTI Assessment", "None", 0, 0, "N/A", "")
-  taskFour = new Task("Reassess Math Test", "None", 0, 0, "N/A", "")
-  taskFive = new Task("ClassDojo Mom", "None", 0, 0, "N/A", "")
-  taskSix = new Task("Math fluency practice", "None", 0, 0, "N/A", "")
-  Michael = new Student("Michael M", [this.taskOne, this.taskTwo], "1", 0, false)
-  Andrea = new Student("Andrea A", [this.taskThree, this.taskFour], "2", 0, false)
-  Ash = new Student("Ash K", [this.taskFive, this.taskSix], "3", 0, false)
-  nameExists = true;
-  taskExists = true;
-  displayStudentIcons = true;
-  displayTaskIcons = true;
-  displayTasksAll = true;
-  studentList: Student[] = [this.Michael]
+  taskOne: any;
+  taskTwo: any;
+  taskThree: any;
+  taskFour: any;
+  taskFive: any;
+  taskSix: any;
+  Michael: any;
+  Andrea: any;
+  Ash: any;
+  nameExists: any;
+  taskExists: any;
+  displayStudentIcons: any;
+  displayTaskIcons: any;
+  displayTasksAll: any;
+  studentList: any;
   
-  activeUser: User;
-  dummyUser = new User(99999, "Foo", "[]");
+  activeUser: any;
+  dummyUser: any;
 
 
 
@@ -213,9 +248,7 @@ export class AppComponent implements OnInit{
       if (userTyped == "Teacher" && this.loginForm.value.password == "123"){
         this.teacherName = this.loginForm.value.username!;
         this.welcomeMessage = "Welcome " + this.teacherName;
-        this.studentList.push(this.Andrea);
-        this.studentList.push(this.Michael);
-        this.studentList.push(this.Ash);
+        this.studentList = [this.Andrea, this.Michael, this.Ash];
         this.beginApplication = true;
       }
      
