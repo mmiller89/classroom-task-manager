@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../user-data/user';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs';
+import { Location, LocationStrategy } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -10,29 +11,32 @@ import { map } from 'rxjs';
 export class UserService {
 
 
-  private baseUrl = 'http://localhost:8080/api/users';
+ 
  
 
-  constructor(private httpClient: HttpClient) { }
+//   constructor(private httpClient: HttpClient,  private location: Location, private locationStrategy: LocationStrategy) { }
 
-  getUserList(): Observable<User[]> {
-    return this.httpClient.get<GetResponse>(this.baseUrl).pipe(
-      map(response => response._embedded.users)
-    )
-  }
+//   private baseUrl = 'http://localhost:8080';
+//   // private baseUrl:string=this.location.path();
 
-  addUser(user: User): Observable<User> {
-    return this.httpClient.post<User>(this.baseUrl, user)
-  }
+//   getUserList(): Observable<User[]> {
+//     return this.httpClient.get<GetResponse>(this.baseUrl + "/api/users").pipe(
+//       map(response => response._embedded.users)
+//     )
+//   }
 
-  putUser(user: User): Observable<User> {
-    return this.httpClient.put<User>(this.baseUrl + `/${user.id}`, user);
-  }
-}
+//   addUser(user: User): Observable<User> {
+//     return this.httpClient.post<User>(this.baseUrl + "/api/users", user)
+//   }
 
-interface GetResponse{
-  _embedded:{
-    users: User[];
-  }
+//   putUser(user: User): Observable<User> {
+//     return this.httpClient.put<User>(this.baseUrl + "/api/users" + `/${user.id}`, user);
+//   }
+// }
+
+// interface GetResponse{
+//   _embedded:{
+//     users: User[];
+//   }
 
 }
