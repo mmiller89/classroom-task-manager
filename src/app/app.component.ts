@@ -248,7 +248,7 @@ export class AppComponent implements OnInit{
       if (userTyped == "Teacher" && this.loginForm.value.password == "123"){
         this.teacherName = this.loginForm.value.username!;
         this.welcomeMessage = "Welcome " + this.teacherName;
-        this.studentList = [this.Andrea, this.Michael, this.Ash];
+        this.studentList = [this.Andrea, this.Michael, this.Ash]
         this.beginApplication = true;
       }
      
